@@ -41,6 +41,8 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 
 `verify.ps1` は import、32項目のモデル検証、10項目のUI/保存統合、起動 smoke を行います。プロセス終了コードに加え Godot の `ERROR` ログも失敗にします。`run-acceptance.ps1` は実 EXE の固定ステップ、3個別バグ比較、目的探索、再起動復元、仮想時計なしの実時間配送を別々に検証します。run別の証拠は `output/runs/` に保存します。画像・人間によるキー操作の検証とは区別しています。
 
+Windows hosted CIではeditor終了時のnative拡張クラッシュ対策として、`verify.ps1 -IsolateImportExtension` と `build-windows.ps1 -RecoveryExport` を使います。これはimport/export工程だけの分離です。正式Guaを戻した実ランタイムと、生成EXEへのGua実通信は同じCIで必ず検証します。
+
 ## Gua 接続と時間
 
 ブリッジは専用 `ws://127.0.0.1:18241`（`GUA_BRIDGE_PORT` で変更可能）。同時実行はポート・保存先を分離してください。通常起動では実時間を固定60Hzの accumulator に反映し、1描画で最大0.1秒を処理します。大きな描画停止による負荷連鎖を抑えるため、実時間と simulation tick は同一とは限りません。
