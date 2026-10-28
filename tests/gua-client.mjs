@@ -44,7 +44,7 @@ export class Gua {
     for(let i=0;i<500;i++) {
       await delay(5); const next=await this.request('get_context_status');
       if(next.sessionEpoch!==first.sessionEpoch) throw new Error('Publication epoch changed');
-      if(next.frameSequence>first.frameSequence) return;
+      if(next.frameSequence>first.frameSequence && next.worldFrameSequence>first.worldFrameSequence) return;
     }
     throw new Error('No fresh publication');
   }
@@ -71,7 +71,7 @@ export class Gua {
     for(let i=0;i<500;i++) {
       const context=await this.request('get_context_status');
       if(context.sessionEpoch!==epoch) throw new Error('Clock epoch changed');
-      if(clock.completedOperationSequence>=seq && context.frameSequence>frame) return;
+      if(clock.completedOperationSequence>=seq && context.frameSequence>frame && context.worldFrameSequence>frame) return;
       await delay(5); clock=await this.request('get_clock');
     }
     throw new Error('Incomplete clock run');
