@@ -23,7 +23,7 @@ jobs:
           Add-Content $env:GITHUB_PATH "$pwd/.deps/ci-godot"
       - name: Import and model regression
         shell: pwsh
-        run: ./scripts/verify.ps1
+        run: ./scripts/verify.ps1 -IsolateImportExtension
       - name: Build Windows EXE
         shell: pwsh
         run: ./scripts/build-windows.ps1 -TemplateDirectory "$pwd/.deps/ci-godot/templates"
