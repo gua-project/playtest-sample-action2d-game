@@ -14,7 +14,7 @@ try {
     New-Item -ItemType Directory -Force output/appdata,output/localappdata,output/save | Out-Null
     $env:APPDATA = (Resolve-Path output/appdata).Path
     $env:LOCALAPPDATA = (Resolve-Path output/localappdata).Path
-    Run-Godot -Arguments @('--headless','--path','.', '--editor','--import','--quit','--log-file','output/import.log')
+    Run-Godot -Arguments @('--headless','--path','.', '--import','--log-file','output/import.log')
     Run-Godot -Arguments @('--headless','--path','.', '--script','res://tests/model_tests.gd','--log-file','output/model-tests.log')
     Run-Godot -Arguments @('--headless','--path','.', '--script','res://tests/ui_tests.gd','--log-file','output/ui-tests.log')
     Run-Godot -Arguments @('--headless','--path','.', '--quit-after','5','--log-file','output/smoke.log')
