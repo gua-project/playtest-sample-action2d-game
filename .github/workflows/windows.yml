@@ -1,0 +1,43 @@
+name: Windows game acceptance
+on:
+  push:
+    branches: ['feat/**', main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned official dependencies
+        shell: pwsh
+        run: |
+          ./scripts/ci-godot.ps1
+          ./scripts/install-gua.ps1
+          Add-Content $env:GITHUB_PATH "$pwd/.deps/ci-godot"
+      - name: Import and model regression
+        shell: pwsh
+        run: ./scripts/verify.ps1
+      - name: Build Windows EXE
+        shell: pwsh
+        run: ./scripts/build-windows.ps1 -TemplateDirectory "$pwd/.deps/ci-godot/templates"
+      - name: Test exported EXE over real Gua transport
+        shell: pwsh
+        run: ./scripts/run-acceptance.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-evidence-${{ github.sha }}
+          path: |
+            build/DeliveryFactory-windows.zip
+            output/*.log
+            output/build-sha256.txt
+            output/exe-fixed/
+            output/runs/
+          retention-days: 14
