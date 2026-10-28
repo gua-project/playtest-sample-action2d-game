@@ -1,6 +1,6 @@
 # 実行記録
 
-2026-10-28。作業ブランチ `feat/delivery-factory`。提出commitは後で記録する。
+2026-10-28。作業ブランチ `feat/delivery-factory`。ゲームとテストの検証対象commitは `b7e2e2ee05c7ff9ba4ec8636f62c21d552b05245`。後続はCI import引数と証拠文書の変更。
 
 ## 確認済み
 
@@ -15,12 +15,22 @@
 - 独立read-onlyレビュー1回実施。保存がno-opでも通る旧テストを状態変更/再起動比較へ修正、Guaバージョンと入力ID/typeをassert、ロード設定の永続化、run別証拠保存に対応。
 - 実EXEの強化した保存試験がJSON数値型のロード拒否を検出し修正。UI統合試験で終了時の解放済みボタン参照を検出し、ゲーム側の同じボタンを再利用して正式addonは変更せず対応。
 
+## 最終ローカルEXE証拠
+
+最終ゲームソースのEXE SHA256: `379fe8cdc69180e684cdea1fb10f7ada34bb0455dd11973eecc7bda2c7853263`。
+
+- [固定ステップ21項目・正常版/B01/B02](evidence/windows-fixed.json): passed。
+- [設置/落下/再回収とB03正常比較](evidence/windows-exploration.json): 3項目passed。
+- [別プロセス再起動復元](evidence/windows-restart.json): passed。
+- [実時間の3配送](evidence/windows-realtime.json): 28,121ms、死亡0、passed。
+- raw wire: `output/runs/20261028T144658930-exe/`。run途中の失敗も別timestampディレクトリに保持。位置・状態の取得には異なるtree frameがあり、固定時計完了はUI/Worldの両フレームで待つ。
+
 ## 未完了・ブロッカー
 
-- 最終のメニュー寿命修正後EXEは再検証中。最新buildとrun/hashの対応は `output/runs/` の各JSONに記録。
+- メニュー寿命修正後の最終EXEも上記の固定・実時間全試験に成功。
 - GUI対象 `Delivery Robot Factory` のウィンドウ発見・起動まで実施。画面取得のアプリ承認が `Computer Use app approval timed out`。GUI入力は実行されず、対象PIDとパスを照合して終了、枠解放済み。画像／人間のキー入力・操作感・各実サイズの実表示は未検証。承認を迂回していない。音は未実装。
 - 外部Guaの同tickプレス境界と設置後落下は確認済み。足場端や着地直前の広範なタイミング探索、死亡とポーズの外部同時入力は未実施（モデルに代表ケースあり）。
-- CI と push は準備中。
+- 作業ブランチへpush済み。CI初回/2回目は Windows runner のGodot import終了時に `-1073741819` (0xC0000005) で失敗。ログを確認し、公式 `--import` 自体が終了まで管理するため冗長な `--quit` を除去して最新CIを実行中。ローカル42項目と実EXE成功をCI成功とは主張しない。
 - リモートは空リポジトリでmain/base commitなし。main bootstrap pushは制約に従い未実施。比較元がないためDraft PRはまだ作成不能。
 
 初期の `output/exe-fixed/` は試行で上書きされたため、全初期失敗のraw保持は主張しない。以後は `output/runs/<timestamp>-exe` と `-source` に分離し、EXE SHA256・source hash・実行時commitを対応付ける。実プロセス接続の初期失敗は、自分の初期ホストとのポート競合を解消した後に復旧。セキュリティ設定は変更していない。未検証・エラーを成功に数えない。

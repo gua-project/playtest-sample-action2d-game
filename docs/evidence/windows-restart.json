@@ -1,0 +1,24 @@
+{
+  "test": "E09 fresh process save restore",
+  "status": "passed",
+  "state": {
+    "mode": "play",
+    "stage": 0,
+    "frame": 6,
+    "carrying": false,
+    "cargo_lost": false,
+    "checkpoint": false,
+    "deaths": 0,
+    "deliveries": 0,
+    "outcomes": 0,
+    "paused": true,
+    "pending_respawn": false,
+    "softlocked": false,
+    "support": "floor",
+    "last_event": "stage_ready",
+    "seed": 112,
+    "bugs": [],
+    "press_active": false,
+    "grounded": true
+  }
+}

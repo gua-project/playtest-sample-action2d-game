@@ -39,7 +39,7 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 
 `build/windows/` が配布フォルダ、`build/DeliveryFactory-windows.zip` が配布 ZIP、`output/build-sha256.txt` に EXE の SHA256 を出力します。テンプレートが既定場所にない場合、`build-windows.ps1 -TemplateDirectory <既存テンプレートフォルダ>` を使用します。新規エンジンや共有設定のインストールはしません。CI では同じ公式 Godot のハッシュ検証済み配布を専用 runner に取得します。
 
-`verify.ps1` は import、モデル検証、起動 smoke を行います。プロセス終了コードに加え Godot の `ERROR` ログも失敗にします。実 EXE と Gua の受入検証、目視・実時間プレイとは区別しています。
+`verify.ps1` は import、32項目のモデル検証、10項目のUI/保存統合、起動 smoke を行います。プロセス終了コードに加え Godot の `ERROR` ログも失敗にします。`run-acceptance.ps1` は実 EXE の固定ステップ、3個別バグ比較、目的探索、再起動復元、仮想時計なしの実時間配送を別々に検証します。run別の証拠は `output/runs/` に保存します。画像・人間によるキー操作の検証とは区別しています。
 
 ## Gua 接続と時間
 
