@@ -26,7 +26,7 @@ jobs:
         run: ./scripts/verify.ps1 -IsolateImportExtension
       - name: Build Windows EXE
         shell: pwsh
-        run: ./scripts/build-windows.ps1 -TemplateDirectory "$pwd/.deps/ci-godot/templates"
+        run: ./scripts/build-windows.ps1 -TemplateDirectory "$pwd/.deps/ci-godot/templates" -RecoveryExport
       - name: Test exported EXE over real Gua transport
         shell: pwsh
         run: ./scripts/run-acceptance.ps1

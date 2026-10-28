@@ -1,4 +1,4 @@
-param([string]$Godot = 'Godot_v4.7-stable_win64_console.exe', [string]$TemplateDirectory = '')
+param([string]$Godot = 'Godot_v4.7-stable_win64_console.exe', [string]$TemplateDirectory = '', [switch]$RecoveryExport)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 if (-not $TemplateDirectory) { $TemplateDirectory = Join-Path $env:APPDATA 'Godot/export_templates/4.7.stable' }
@@ -17,9 +17,15 @@ try {
     $presets = Get-Content export_presets.cfg -Raw
     $customPresets = $presets.Replace('custom_template/release=""', ('custom_template/release="' + $template.Replace('\','/') + '"'))
     Set-Content export_presets.cfg $customPresets -NoNewline
-    try { & $Godot --headless --path . --export-release Windows --log-file output/export.log }
+    $exportArguments = @('--headless','--path','.', '--export-release','Windows','--log-file','output/export.log')
+    if ($RecoveryExport) { $exportArguments = @('--recovery-mode') + $exportArguments }
+    try {
+        & $Godot @exportArguments
+        $exportExit = $LASTEXITCODE
+    }
     finally { Set-Content export_presets.cfg $presets -NoNewline }
-    if ($LASTEXITCODE -ne 0 -or (Select-String output/export.log -Pattern 'ERROR:|SCRIPT ERROR' -Quiet)) { throw 'Windows export failed' }
+    Write-Host "Godot export exit=$exportExit recovery=$RecoveryExport"
+    if ($exportExit -ne 0 -or (Select-String output/export.log -Pattern 'ERROR:|SCRIPT ERROR' -Quiet)) { throw "Windows export failed: exit=$exportExit" }
     Copy-Item README.md,assets/OFL-MPLUS1p.txt,addons/gua/LICENSE build/windows/
     Get-FileHash build/windows/DeliveryFactory.exe -Algorithm SHA256 | Format-List | Out-File output/build-sha256.txt
     Compress-Archive build/windows/* build/DeliveryFactory-windows.zip -Force
