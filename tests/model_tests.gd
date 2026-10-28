@@ -122,6 +122,3 @@ func _initialize() -> void:
 func safe_phase(m: RefCounted) -> bool:
 	var period := 240 if m.stage < 2 else 180
 	return (m.frame + m.seed_value % 60) % period < 50
-
-
-
