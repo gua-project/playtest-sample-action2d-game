@@ -11,6 +11,19 @@
 
 Godot4.7、正式Gua.Testing/Gua.Testing.Godot 1.1.2、seed112、bugs=[]が既定。既知バグ比較だけ対応IDを一つ有効化する。ケースの初期条件・手順・期待結果は [test-matrix.md](test-matrix.md)、実行コマンドと依存は [README](../README.md#開発ビルド) を参照する。
 
+## 実行方法
+
+Windows x64、PowerShell 7、.NET 10 SDK、既存Godot4.7と同版export templateを使う。正式addonの取得・importはREADMEの準備手順を行い、repo rootで実行する。
+
+```powershell
+./scripts/verify.ps1                    # 内部モデルとsource起動smoke
+./scripts/run-source-tests.ps1 -Restore # locked restoreと正式source回帰
+./scripts/build-windows.ps1             # 配布物を更新
+./scripts/run-exe-smoke.ps1             # 配布起動だけを確認
+```
+
+source回帰はport18241、配布smokeは18244を使う。scriptは使用中portを検出したら失敗し、無関係なプロセスを終了しない。保存・APPDATA・出力はcheckout内で分離し、保存復元ケースだけ同じテストのsaveをsource再起動へ引き継ぐ。配布EXEの再起動E2Eとは区別する。[CI](../.github/workflows/windows.yml)も同じ層を別stepで実行する。
+
 ## 正式APIと同期
 
 source回帰はゲームのSemantic UIと標準Game Inputを使う。モデルのclear/die/setterは呼ばない。正式Locatorで対象がvisible/enabledであることを確認し、guarded dispatchの相関済み完了を待つ。要求前の`stale_guard`拒否だけを、同epochの再観測・Locator再検証後に最大2回再要求する。enqueue後の拒否、不確実、timeoutは再要求せず失敗にする。
@@ -39,4 +52,6 @@ source起動時にはcore/runtime/Godot plugin各versionが1.1.2、標準入力m
 
 GUI画像・実サイズ・ネイティブ入力・操作感は未検証。Playtest E2Eも未実行であり、内部モデルやsource回帰、配布smokeの成功を昇格させない。音は未実装。SDK不足は具体的な未検証事項として記録し、独自wire/runnerで補完しない。
 
-実行日時・対象SHA・結果・旧ケースの移行対応・履歴上のレビュー記録は [検証記録](validation.md) に置く。旧EXE試行はPlaytest Run/Traceではなく、現在のHEADの成功証拠でもない。
+足場端や着地直前の広範なタイミング探索は未実施。モデルT10は着地直前の代表ケース、source X02は足場離脱2/8tick後の代表ケースであり、全タイミングの成立を保証しない。
+
+実行日時・対象SHA・結果・旧ケースの移行対応は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) を参照する。旧EXE試行はPlaytest Run/Traceではなく、現在のHEADの成功証拠でもない。ローカルのraw/ログパスはGitへの保存を意味せず、期限付きCI artifactの長期可用性も保証しない。保存済みの [証拠JSON](evidence/) は元の対象と判定範囲を保って扱う。

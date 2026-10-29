@@ -1,6 +1,6 @@
 # issue #1・実装・テスト契約
 
-Godot4.7 / 正式Gua1.1.2 / 内容版`factory-scenario-1` / seed112 / bugs=[]を既定とする。バグ比較は指定IDだけを有効化する。実行層とfixtureの詳細は [test-ownership.md](test-ownership.md)、実行方法は [README](../README.md#開発ビルド) を参照。下記は期待値であり、実行成功の一覧ではない。実行日時・対象build・結果は [validation.md](validation.md) に分離する。
+Godot4.7 / 正式Gua1.1.2 / 内容版`factory-scenario-1` / seed112 / bugs=[]を既定とする。バグ比較は指定IDだけを有効化する。実行層とfixtureの詳細は [testing.md](testing.md)、実行方法は [README](../README.md#開発ビルド) を参照。下記は期待値であり、実行成功の一覧ではない。実行日時・対象build・結果は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) に分離する。
 
 ## 内部モデル回帰
 

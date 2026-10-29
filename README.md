@@ -43,13 +43,13 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 
 `run-exe-smoke.ps1` はEXEがリソース/DLLを読み込んで起動マーカーに達し、エラーログなく終了することだけを確認します。操作、探索、目標判定、外部接続の保証、Playtestの合格判定は行いません。
 
-CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ対策として、importだけ拡張ロードを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。
+CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ（0xC0000005）への対処として、importだけ拡張ロードとcacheを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。これは根本原因の解消を意味しません。PowerShellからのimport/exportは同じ公式配布のconsole EXEで終了を待ち、nonzero exitを失敗とします。生成EXEのsmokeは起動限定です。
 
 ## Playtest との分担
 
 このサンプルはゲーム本体と再現条件・独立した期待値を提供します。配布EXEの launch/attach、Scenario/Environment、探索、予算・中断・cleanup、Trace/Recording/Replay、製品としてのRun/Resultは **Gua Playtest側** の責務です。このrepoにはその代替Runnerを追加しません。Playtest未完成部分を独自実装で埋めず、未実行E2Eとして残します。
 
-[テスト責務と判定契約](docs/test-ownership.md) と [Playtest接続情報・独立期待値](docs/playtest-handoff.md) を参照してください。過去のEXE試行は [検証記録](docs/validation.md) に分離し、現在のsource回帰やPlaytest E2Eの成功とは区別します。
+[テスト責務と判定契約](docs/testing.md) と [Playtest接続情報・独立期待値](docs/playtest-handoff.md) を参照してください。過去のEXE試行は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) に分離し、現在のsource回帰やPlaytest E2Eの成功とは区別します。
 
 ## Gua 接続と時間
 
@@ -61,6 +61,13 @@ CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` 
 
 テストは正式SDKが返す相関済み完了を待ち、その完了後のUI・World・Observe公開とavailable状態を揃えてから判定します。Observeの利用不能やtimeoutを成功に読み替えません。C#のTimeSpanが100ns精度のため、source回帰の時計stepは1/60秒を上へ丸めた16.6667msです。物理処理はゲーム側の固定60Hzだけで実行します。
 
-## 検証範囲
+## ドキュメント
 
-[テスト一覧・要件対応](docs/test-matrix.md)、[実装判断と既知バグ](docs/design.md)、[実行結果](docs/validation.md) を参照してください。未実施の EXE・画像・探索・人間操作検証をモデルテストの成功で代用しません。音は仮素材段階では実装していないため、音による判断・音質は対象外です。3本のサンプルでゲーム QA 全般の網羅は主張しません。
+| 文書 | 役割 |
+|---|---|
+| [docs/testing.md](docs/testing.md) | テスト責務・実行方法・正式API・同期と判定制約 |
+| [docs/test-matrix.md](docs/test-matrix.md) | 初期条件・手順・独立期待値・seed・バグ設定・実行層 |
+| [docs/playtest-handoff.md](docs/playtest-handoff.md) | Playtest接続条件・独立期待値・未実行範囲 |
+| [docs/design.md](docs/design.md) | ゲーム固有の設計判断と既知バグ |
+
+実行ごとの結果は [PRの検証結果](https://github.com/gua-project/playtest-sample-action2d-game/pull/2/checks)、過去buildと証拠の対応は [PRの保存記録](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) を参照してください。未実施の EXE・画像・探索・人間操作検証をモデルテストの成功で代用しません。音は仮素材段階では実装していないため、音による判断・音質は対象外です。3本のサンプルでゲーム QA 全般の網羅は主張しません。

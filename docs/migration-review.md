@@ -10,6 +10,6 @@
 
 MR03追加回帰の初期条件はseed112、stage2、deliveries2、deaths3、carrying/checkpoint=true、B03のみ、frame128。Loadで初期状態を検証後、準備用保存ファイルを削除し通常UIのSaveで再生成する。Reset/Startで進行を変更してからLoadし、source再起動後のLoadとも比較する。fixture準備はsource回帰の初期条件であり、通常3区間走破や配布EXE/Playtest E2Eの成功証拠にはしない。
 
-レビューでは、正式API/CIの構造的な誤用、専用clear/setter、Playtest未実行の成功扱い、EXE smokeのrunner肥大は見つからなかった。新たなAPI制約を独自wireやrunnerで埋めていない。修正確認と実行結果はPR本文およびvalidation.mdに記録する。
+レビューでは、正式API/CIの構造的な誤用、専用clear/setter、Playtest未実行の成功扱い、EXE smokeのrunner肥大は見つからなかった。新たなAPI制約を独自wireやrunnerで埋めていない。修正確認と実行結果はPR本文と[保存記録](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576)を参照する。
 
 残余リスク: GUI画像・実サイズ・ネイティブ入力、Playtest E2E、更新なしの長時間保持入力契約は未検証。今回のレビューやsource回帰はこれらを保証しない。

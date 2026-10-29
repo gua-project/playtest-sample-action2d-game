@@ -31,5 +31,6 @@
 
 ## 証拠の扱い
 
-過去のEXE試行の日時・対象SHA・hash・JSON・ログの所在は [検証記録](validation.md) を参照する。旧自作クライアントのJSONはPlaytest Run/Result/Traceではなく、Playtest E2Eの完了証拠には使用しない。新しいRunでは実build identityと証拠を改めて固定する。
+過去のEXE試行の日時・対象SHA・hash・JSON・ログの所在は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) を参照する。旧自作クライアントのJSONはPlaytest Run/Result/Traceではなく、Playtest E2Eの完了証拠には使用しない。新しいRunでは実build identityと証拠を改めて固定する。
+
 参照する正本: [Playtest preparation](https://github.com/gua-project/gua-playtest/blob/main/docs/preparation.md)、[Run責務](https://github.com/gua-project/gua-playtest/blob/main/docs/execution.md)、[fixture独立証拠](https://github.com/gua-project/gua-playtest/blob/main/docs/fixture-evidence.md)、[製品全体E2E #18](https://github.com/gua-project/gua-playtest/issues/18)。
