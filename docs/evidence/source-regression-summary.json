@@ -9,70 +9,70 @@
   "passed": 12,
   "failed": 0,
   "skipped": 0,
-  "trx": "output/source-regression-results/20261029T113359376/source-regression.trx",
+  "trx": "output/source-regression-results/20261029T114026873/source-regression.trx",
   "tests": [
     {
-      "name": "InvalidSaveDoesNotChangeTheLiveState",
       "outcome": "Passed",
-      "duration": "00:00:00.8653490"
+      "duration": "00:00:08.7334060",
+      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)"
     },
     {
-      "name": "MenuPauseSaveLoadAndSourceRestart",
       "outcome": "Passed",
-      "duration": "00:00:01.7909510"
+      "duration": "00:00:00.7582600",
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)"
     },
     {
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
       "outcome": "Passed",
-      "duration": "00:00:07.3925820"
+      "duration": "00:00:08.4140700",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)"
     },
     {
-      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)",
       "outcome": "Passed",
-      "duration": "00:00:00.7445990"
+      "duration": "00:00:01.7943330",
+      "name": "MenuPauseSaveLoadAndSourceRestart"
     },
     {
-      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
       "outcome": "Passed",
-      "duration": "00:00:00.7501870"
+      "duration": "00:00:00.7573860",
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)"
     },
     {
-      "name": "LanguageMenusFitTheLogicalViewport",
       "outcome": "Passed",
-      "duration": "00:00:01.0351520"
+      "duration": "00:00:00.8517470",
+      "name": "InvalidSaveDoesNotChangeTheLiveState"
     },
     {
-      "name": "ResultScreenReplayResetsProgress",
       "outcome": "Passed",
-      "duration": "00:00:00.7626760"
+      "duration": "00:00:07.1066670",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)"
     },
     {
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
       "outcome": "Passed",
-      "duration": "00:00:07.0883180"
+      "duration": "00:00:01.3471550",
+      "name": "LanguageMenusFitTheLogicalViewport"
     },
     {
-      "name": "DeathThenPauseDefersExactlyOneRespawn",
       "outcome": "Passed",
-      "duration": "00:00:09.8749250"
+      "duration": "00:00:01.7680860",
+      "name": "ResultScreenReplayResetsProgress"
     },
     {
-      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
       "outcome": "Passed",
-      "duration": "00:00:07.7589610"
+      "duration": "00:00:09.8173790",
+      "name": "DeathThenPauseDefersExactlyOneRespawn"
     },
     {
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
       "outcome": "Passed",
-      "duration": "00:00:07.1173020"
+      "duration": "00:00:07.8247450",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)"
     },
     {
-      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
       "outcome": "Passed",
-      "duration": "00:00:07.6291320"
+      "duration": "00:00:08.1191570",
+      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)"
     }
   ],
-  "sourceSceneSha256": "c94fb7f26fc71a729474da9d2529e108ab073e8b9a1faa55dfc3fe6cc3a4a3ad",
+  "sourceSceneSha256": "866084835f4d72380fa2b10cb59b3aa9dc72c203bafa8acd278bf4adef07744a",
   "testSha256": "12e88d3d6bab4032b6fc14e5519dc3c64199fb355ae838986ff2fc614fe518b6",
   "fixtureSha256": "b56277974e96e157c422dde973496f37b9e780b465f2c905ca005a20ecea20ea"
 }

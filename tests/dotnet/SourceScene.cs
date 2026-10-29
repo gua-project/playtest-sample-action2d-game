@@ -70,12 +70,27 @@ internal sealed class SourceScene : IDisposable
     {
         var beforePublication = Client.GetContextStatus();
         input ??= Client.CreateGuardedDispatchSession();
-        var node = await GuaAssertions.Query(Client).ById(request.NodeId!).ResolveAsync();
-        node.ToBeVisible().ToBeEnabled();
-        using var tree = JsonDocument.Parse(Client.GetUiTreeJson());
-        var guard = new GuaDispatchGuard(tree.RootElement.GetProperty("sessionEpoch").GetUInt64(),
-            GuaObservationProfile.Debug, tree.RootElement.GetProperty("revision").GetUInt64(), input.SourceId);
-        var attempt = input.SendUi(guard, request);
+        GuaRemoteDispatchAttempt attempt;
+        var refresh = 0;
+        do
+        {
+            var node = await GuaAssertions.Query(Client).ById(request.NodeId!).ResolveAsync();
+            node.ToBeVisible().ToBeEnabled();
+            using var tree = JsonDocument.Parse(Client.GetUiTreeJson());
+            var epoch = tree.RootElement.GetProperty("sessionEpoch").GetUInt64();
+            Assert.That(epoch, Is.EqualTo(beforePublication.SessionEpoch));
+            var guard = new GuaDispatchGuard(epoch, GuaObservationProfile.Debug,
+                tree.RootElement.GetProperty("revision").GetUInt64(), input.SourceId);
+            attempt = input.SendUi(guard, request);
+            if (attempt.State != GuaRemoteDispatchState.Rejected ||
+                attempt.Error?.Contains("stale_guard", StringComparison.Ordinal) != true) break;
+            if (refresh == 2) break;
+            // A stale guard is rejected before enqueue, so this action did not
+            // execute. Re-observe and re-check the target, never replay an
+            // enqueued/completed/timed-out action or cross a changed epoch.
+            TestContext.WriteLine($"UI {request.NodeId}: rejected stale guard; refreshing observation {refresh + 1}/2.");
+            await Task.Delay(10);
+        } while (++refresh <= 2);
         var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(5);
         while (attempt.State == GuaRemoteDispatchState.Enqueued && DateTime.UtcNow < deadline)
         {

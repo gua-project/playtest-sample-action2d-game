@@ -29,3 +29,5 @@
 ## 監査と結果の扱い
 
 独立レビューの既存1回を維持し、今回のC#・CI・責務整理は追加の独立監査をしていない。今回のコンパイル/ローカル実行/CI結果を別途 validation.md とTRXで報告する。失敗・未実行・API制約は成功/skipへ変換しない。SDK不足なら具体的な呼び出し・状態を報告し、サンプル独自runnerやwireで補完しない。
+
+正式APIの正本: [Gua.Testing.Godot source host 1.1.2](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing.Godot/GodotSceneTestHost.cs)、[共通SDK](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaWebSocketContext.cs)、[guarded dispatch](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaRemoteGuardedDispatch.cs)。source UI回帰では要求前のstale_guard拒否だけを同epochの再観測・Locator再検証後に最大2回再要求する。enqueue後の拒否/不確実/timeoutを再要求で隠さない。
