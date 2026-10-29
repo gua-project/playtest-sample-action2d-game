@@ -33,6 +33,7 @@
 - 外部Guaの同tickプレス境界、設置後落下、足場端の2/8tick入力、死亡直後ポーズと再開を確認済み。足場端や着地直前の広範なタイミング探索は未実施（モデルに着地直前の代表ケースあり）。
 - Windows hosted CI のeditor終了時に `-1073741819` (0xC0000005) を検出。既存サンプル同様にimport中だけ拡張の自動ロードを分離し、exportには公式recovery modeを使用。実行前には必ず正式Guaを有効に戻し、生成EXEのバージョンと実通信をassertする。終了コードを無視せず、Windows runtime試験を省略していない。
 - **CI成功**: [run 40640580981](https://github.com/gua-project/playtest-sample-action2d-game/actions/runs/40640580981)、対象commit `9fb77fef69431d0e4775a1237414c7469308bc85`。公式依存取得、import、42項目、Windows export、実EXEの固定/実時間・3個別バグ比較・探索・再起動復元を通過。配布ZIPとraw wire/JSONは同runの `windows-evidence-<commit>` artifactに保存。
-- リモートは空リポジトリでmain/base commitなし。main bootstrap pushは制約に従い未実施。比較元がないためDraft PRはまだ作成不能。
+- 2026-10-29、ユーザーの明示承認に基づき、空tree `4b825dc642cb6eb9a060e54bf8d69288fbee4904` の既存ancestor `fb8c288620bb84facfd1dd6e43209809f2a63e94` だけをmainへ初期push。mainを既定ブランチに設定。ゲームコードのmainへのマージ、force push、自動マージ、Release公開は行っていない。
+- main向けDraft PRの作成は自動承認レビューで実行前に拒否された。「ユーザー承認は空のmain初期化に限定され、PR作成の明示承認がない」という理由。PRは未作成、別経路の再試行なし。作成内容は `output/pr-body.md` に準備済みで、親側に明示承認の確認を依頼中。
 
 初期の `output/exe-fixed/` は試行で上書きされたため、全初期失敗のraw保持は主張しない。以後は `output/runs/<timestamp>-exe` と `-source` に分離し、EXE SHA256・source hash・実行時commitを対応付ける。実プロセス接続の初期失敗は、自分の初期ホストとのポート競合を解消した後に復旧。セキュリティ設定は変更していない。未検証・エラーを成功に数えない。
