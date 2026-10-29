@@ -27,21 +27,29 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 
 ## 開発・ビルド
 
-既存 Godot 4.7 と同版の Windows export template、PowerShell 7、Node.js 24 を使用します。共有環境を変更せず、Gua を checkout 内に取得します。
+既存 Godot 4.7 と同版の Windows export template、PowerShell 7、.NET 10 SDK を使用します。ゲームは GDScript のままです。Node.js と自作 JS wire client は現在のテストには使いません。依存キャッシュ・保存先・出力は checkout 内へ分離します。
 
 ```powershell
 ./scripts/install-gua.ps1
 ./scripts/verify.ps1
+./scripts/run-source-tests.ps1 -Restore # 正式C# APIでsource sceneの固定回帰
 ./scripts/build-windows.ps1
-./scripts/run-acceptance.ps1             # 実 EXE・headless・固定ステップ
-./scripts/run-acceptance.ps1 -Source     # ソース実行との比較
+./scripts/run-exe-smoke.ps1             # 配布物の起動・リソース読込だけ
 ```
 
 `build/windows/` が配布フォルダ、`build/DeliveryFactory-windows.zip` が配布 ZIP、`output/build-sha256.txt` に EXE の SHA256 を出力します。テンプレートが既定場所にない場合、`build-windows.ps1 -TemplateDirectory <既存テンプレートフォルダ>` を使用します。新規エンジンや共有設定のインストールはしません。CI では同じ公式 Godot のハッシュ検証済み配布を専用 runner に取得します。
 
-`verify.ps1` は import、32項目のモデル検証、10項目のUI/保存統合、起動 smoke を行います。プロセス終了コードに加え Godot の `ERROR` ログも失敗にします。`run-acceptance.ps1` は実 EXE の固定ステップ、3個別バグ比較、目的探索、再起動復元、仮想時計なしの実時間配送を別々に検証します。run別の証拠は `output/runs/` に保存します。画像・人間によるキー操作の検証とは区別しています。
+`verify.ps1` は import、32項目の内部モデル検証、source起動 smoke を行います。これはGua UI/E2Eの証拠とは別です。`run-source-tests.ps1` は正式 NuGet **Gua.Testing.Godot 1.1.2 / Gua.Testing 1.1.2** と NUnit を使用します。`GodotSceneTestHost` で `res://main.tscn` を起動し、正式 Locator/guarded UI・入力、Observe、World、仮想時計で開始・保存復元・境界・個別バグ・結果からの再プレイを確認します。TRXと公式APIのJSON添付は `output/source-regression-results/` と `output/source-regression/` へ保存します。source sceneの検証であり、配布EXEの受入とは呼びません。
 
-Windows hosted CIではeditor終了時のnative拡張クラッシュ対策として、`verify.ps1 -IsolateImportExtension` と `build-windows.ps1 -RecoveryExport` を使います。これはimport/export工程だけの分離です。正式Guaを戻した実ランタイムと、生成EXEへのGua実通信は同じCIで必ず検証します。
+`run-exe-smoke.ps1` はEXEがリソース/DLLを読み込んで起動マーカーに達し、エラーログなく終了することだけを確認します。操作、探索、目標判定、外部接続の保証、Playtestの合格判定は行いません。
+
+CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ対策として、importだけ拡張ロードを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。共有SDKやセキュリティ設定の変更、GUI承認の要求はしません。
+
+## Playtest との分担
+
+このサンプルはゲーム本体と再現条件・独立した期待値を提供します。配布EXEの launch/attach、Scenario/Environment、探索、予算・中断・cleanup、Trace/Recording/Replay、製品としてのRun/Resultは **Gua Playtest側** の責務です。このrepoにはその代替Runnerを追加しません。Playtest未完成部分を独自実装で埋めず、未実行E2Eとして残します。
+
+以前のEXE操作スクリプト・自作wire clientは退役しました。既存の成功証拠は履歴として残し、Playtestの完成や今回のC#回帰の成功へ転用しません。[全テストの移し先](docs/test-ownership.md) と [Playtest接続情報・独立期待値](docs/playtest-handoff.md) を参照してください。
 
 ## Gua 接続と時間
 
@@ -51,7 +59,7 @@ Windows hosted CIではeditor終了時のnative拡張クラッシュ対策とし
 
 標準 Semantic UI でメニュー、標準 Game Input の `move`（axis1d）、`jump`、`interact` で通常プレイを操作します。World Tree の `robot` / `cargo` / `platform` / `press` / `goal` / `checkpoint` に標準位置を発行します。追加状態は正式 Observe の world owner で登録し、独自の公開範囲判定や「クリア」API は実装していません。Observe は既定の Debug 登録です。Player 公開・非公開の判断は Gua の既存プロトコルに従います。
 
-テスト client は wire の request ID、入力・UI 操作の完了、時計の operation sequence / epoch / publication frame を確認します。Observe の利用不能・gap・timeout を成功に読み替えません。
+テストは正式SDKが返す相関済み完了を待ち、Worldの再公開後に状態を判定します。Observeの利用不能やtimeoutを成功に読み替えません。C#のTimeSpanが100ns精度のため、source回帰の時計stepは1/60秒を上へ丸めた16.6667msです。物理処理はゲーム側の固定60Hzだけで実行します。
 
 ## 検証範囲
 
