@@ -59,7 +59,7 @@ CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` 
 
 標準 Semantic UI でメニュー、標準 Game Input の `move`（axis1d）、`jump`、`interact` で通常プレイを操作します。World Tree の `robot` / `cargo` / `platform` / `press` / `goal` / `checkpoint` に標準位置を発行します。追加状態は正式 Observe の world owner で登録し、独自の公開範囲判定や「クリア」API は実装していません。Observe は既定の Debug 登録です。Player 公開・非公開の判断は Gua の既存プロトコルに従います。
 
-テストは正式SDKが返す相関済み完了を待ち、Worldの再公開後に状態を判定します。Observeの利用不能やtimeoutを成功に読み替えません。C#のTimeSpanが100ns精度のため、source回帰の時計stepは1/60秒を上へ丸めた16.6667msです。物理処理はゲーム側の固定60Hzだけで実行します。
+テストは正式SDKが返す相関済み完了を待ち、その完了後のUI・World・Observe公開とavailable状態を揃えてから判定します。Observeの利用不能やtimeoutを成功に読み替えません。C#のTimeSpanが100ns精度のため、source回帰の時計stepは1/60秒を上へ丸めた16.6667msです。物理処理はゲーム側の固定60Hzだけで実行します。
 
 ## 検証範囲
 

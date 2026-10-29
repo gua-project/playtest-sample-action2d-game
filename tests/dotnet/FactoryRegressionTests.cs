@@ -14,6 +14,7 @@ public sealed class FactoryRegressionTests
     [SetUp]
     public void OpenSourceScene()
     {
+        scene = null!; // A failed constructor must not leave the previous disposed test host.
         var name = string.Concat(TestContext.CurrentContext.Test.Name.Select(c => char.IsLetterOrDigit(c) ? c : '_'));
         directory = Path.Combine(SourceScene.Root, "output", "source-regression", DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff") + "-" + name);
         scene = new SourceScene(directory);

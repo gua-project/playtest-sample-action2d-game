@@ -49,9 +49,10 @@ internal sealed class SourceScene : IDisposable
             Client.WaitUntilAvailable(TimeSpan.FromSeconds(10));
             var version = Client.GetVersion();
             Assert.That(version.CoreVersion, Is.EqualTo("1.1.2"));
+            Published(Client.GetContextStatus().SessionEpoch).GetAwaiter().GetResult();
             Assert.That(State().GetProperty("seed").GetInt64(), Is.EqualTo(112));
         }
-        catch { Host.Dispose(); throw; }
+        catch { Client?.Dispose(); Host.Dispose(); throw; }
     }
 
     public async Task Click(string id)
@@ -99,7 +100,7 @@ internal sealed class SourceScene : IDisposable
         }
         Assert.That(attempt.State, Is.EqualTo(GuaRemoteDispatchState.Completed), attempt.Error);
         Assert.That(attempt.Completion!.Value.GetProperty("succeeded").GetBoolean(), Is.True);
-        await Published(beforePublication.SessionEpoch, beforePublication.FrameSequence, beforePublication.WorldFrameSequence);
+        await Published(beforePublication.SessionEpoch);
     }
 
     public async Task Input(string id, object? value = null, bool release = false)
@@ -120,7 +121,7 @@ internal sealed class SourceScene : IDisposable
         Assert.That(attempt.State, Is.EqualTo(GuaRemoteDispatchState.Completed), attempt.Error);
         Assert.That(attempt.Completion!.Value.GetProperty("succeeded").GetBoolean(), Is.True);
         if (release) heldInputs.Remove(id); else heldInputs.Add(id);
-        await Published(beforePublication.SessionEpoch, beforePublication.FrameSequence, beforePublication.WorldFrameSequence);
+        await Published(beforePublication.SessionEpoch);
     }
 
     public async Task Release()
@@ -164,12 +165,17 @@ internal sealed class SourceScene : IDisposable
 
         // The SDK correlates operation/epoch/UI completion. Also require a fresh
         // World publication before inspecting position/Observe from that step.
-        await Published(beforePublication.SessionEpoch, beforePublication.FrameSequence, beforePublication.WorldFrameSequence);
+        await Published(beforePublication.SessionEpoch);
     }
 
-    private async Task Published(ulong epoch, ulong uiFrame, ulong worldFrame)
+    private async Task Published(ulong epoch)
     {
-        var last = Client.GetContextStatus();
+        // The action/clock receipt precedes Observe publication. Require a
+        // complete later host cycle, including the Observe document, rather
+        // than accepting frames that advanced before dispatch completed.
+        var before = Client.GetContextStatus();
+        Assert.That(before.SessionEpoch, Is.EqualTo(epoch));
+        var last = before;
         var deadline = DateTime.UtcNow + TimeSpan.FromSeconds(5);
         while (DateTime.UtcNow < deadline)
         {
@@ -177,10 +183,16 @@ internal sealed class SourceScene : IDisposable
             var after = Client.GetContextStatus();
             last = after;
             Assert.That(after.SessionEpoch, Is.EqualTo(epoch));
-            if (after.FrameSequence > uiFrame && after.WorldFrameSequence > worldFrame) return;
-            await Task.Delay(5);
+            if (after.FrameSequence <= before.FrameSequence || after.WorldFrameSequence <= before.WorldFrameSequence) continue;
+            using var snapshot = JsonDocument.Parse(Client.GetObserveSnapshotJson());
+            var document = snapshot.RootElement.GetProperty("document");
+            var entries = document.GetProperty("entries").EnumerateArray().ToArray();
+            if (document.GetProperty("sessionEpoch").GetUInt64() == epoch &&
+                document.GetProperty("uiFrame").GetUInt64() > before.FrameSequence &&
+                document.GetProperty("worldFrame").GetUInt64() > before.WorldFrameSequence &&
+                entries.Length >= 18 && entries.All(e => e.GetProperty("status").GetString() == "available")) return;
         }
-        throw new AssertionException($"No fresh UI/World publication. before={epoch}/{uiFrame}/{worldFrame} last={JsonSerializer.Serialize(last)} world={Client.GetWorldObjectTreeJson()}");
+        throw new AssertionException($"No fresh UI/World/Observe publication. before={JsonSerializer.Serialize(before)} last={JsonSerializer.Serialize(last)} observe={Client.GetObserveSnapshotJson()}");
     }
 
     public async Task Approach(double target, double speed = 245)
