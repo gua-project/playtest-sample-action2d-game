@@ -37,19 +37,19 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 ./scripts/run-exe-smoke.ps1             # 配布物の起動・リソース読込だけ
 ```
 
-`build/windows/` が配布フォルダ、`build/DeliveryFactory-windows.zip` が配布 ZIP、`output/build-sha256.txt` に EXE の SHA256 を出力します。テンプレートが既定場所にない場合、`build-windows.ps1 -TemplateDirectory <既存テンプレートフォルダ>` を使用します。新規エンジンや共有設定のインストールはしません。CI では同じ公式 Godot のハッシュ検証済み配布を専用 runner に取得します。
+`build/windows/` が配布フォルダ、`build/DeliveryFactory-windows.zip` が配布 ZIP、`output/build-sha256.txt` に EXE の SHA256 を出力します。テンプレートが既定場所にない場合、`build-windows.ps1 -TemplateDirectory <既存テンプレートフォルダ>` を使用します。CI では同じ公式 Godot のハッシュ検証済み配布を専用 runner に取得します。
 
 `verify.ps1` は import、32項目の内部モデル検証、source起動 smoke を行います。これはGua UI/E2Eの証拠とは別です。`run-source-tests.ps1` は正式 NuGet **Gua.Testing.Godot 1.1.2 / Gua.Testing 1.1.2** と NUnit を使用します。`GodotSceneTestHost` で `res://main.tscn` を起動し、正式 Locator/guarded UI・入力、Observe、World、仮想時計で開始・保存復元・境界・個別バグ・結果からの再プレイを確認します。TRXと公式APIのJSON添付は `output/source-regression-results/` と `output/source-regression/` へ保存します。source sceneの検証であり、配布EXEの受入とは呼びません。
 
 `run-exe-smoke.ps1` はEXEがリソース/DLLを読み込んで起動マーカーに達し、エラーログなく終了することだけを確認します。操作、探索、目標判定、外部接続の保証、Playtestの合格判定は行いません。
 
-CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ対策として、importだけ拡張ロードを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。共有SDKやセキュリティ設定の変更、GUI承認の要求はしません。
+CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ対策として、importだけ拡張ロードを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。
 
 ## Playtest との分担
 
 このサンプルはゲーム本体と再現条件・独立した期待値を提供します。配布EXEの launch/attach、Scenario/Environment、探索、予算・中断・cleanup、Trace/Recording/Replay、製品としてのRun/Resultは **Gua Playtest側** の責務です。このrepoにはその代替Runnerを追加しません。Playtest未完成部分を独自実装で埋めず、未実行E2Eとして残します。
 
-以前のEXE操作スクリプト・自作wire clientは退役しました。既存の成功証拠は履歴として残し、Playtestの完成や今回のC#回帰の成功へ転用しません。[全テストの移し先](docs/test-ownership.md) と [Playtest接続情報・独立期待値](docs/playtest-handoff.md) を参照してください。
+[テスト責務と判定契約](docs/test-ownership.md) と [Playtest接続情報・独立期待値](docs/playtest-handoff.md) を参照してください。過去のEXE試行は [検証記録](docs/validation.md) に分離し、現在のsource回帰やPlaytest E2Eの成功とは区別します。
 
 ## Gua 接続と時間
 

@@ -29,8 +29,7 @@
 
 基準となるゲーム判定と、既知バグが予定どおり存在するというfixture判定は別。Playtest自身が採点したResultだけに頼らず、ここで固定した期待値とゲーム事実・元のGua Traceを照合する。サンプルは別のGoal evaluatorやTrace/Replay engineを提供しない。
 
-## 既存証拠と限界
+## 証拠の扱い
 
-`docs/evidence/windows-*.json` は旧自作クライアントによるEXE試行。対象EXE hash `379fe8cdc69180e684cdea1fb10f7ada34bb0455dd11973eecc7bda2c7853263` と各JSONのcommit/seed/flagsを保持する。過去のゲーム機能確認として参照できるが、Playtestが生成したRun/Result/Traceではない。Playtest E2Eの完了証拠には使用しない。
-
+過去のEXE試行の日時・対象SHA・hash・JSON・ログの所在は [検証記録](validation.md) を参照する。旧自作クライアントのJSONはPlaytest Run/Result/Traceではなく、Playtest E2Eの完了証拠には使用しない。新しいRunでは実build identityと証拠を改めて固定する。
 参照する正本: [Playtest preparation](https://github.com/gua-project/gua-playtest/blob/main/docs/preparation.md)、[Run責務](https://github.com/gua-project/gua-playtest/blob/main/docs/execution.md)、[fixture独立証拠](https://github.com/gua-project/gua-playtest/blob/main/docs/fixture-evidence.md)、[製品全体E2E #18](https://github.com/gua-project/gua-playtest/issues/18)。
