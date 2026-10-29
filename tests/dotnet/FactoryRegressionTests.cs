@@ -40,9 +40,11 @@ public sealed class FactoryRegressionTests
         Assert.That(scene.Position().X, Is.GreaterThan(savedPosition.X));
         await scene.Click("pause"); await scene.Click("language"); await scene.Click("size");
         Assert.That(ResumeLabel(), Is.EqualTo("Resume"));
+        AssertSettings("en", 1);
         await scene.Click("load");
         AssertSavedState(savedFrame, savedPosition);
         Assert.That(ResumeLabel(), Is.EqualTo("再開"));
+        AssertSettings("ja", 0);
         scene.Evidence("loaded");
         scene.Dispose();
         scene = null!;
@@ -51,9 +53,17 @@ public sealed class FactoryRegressionTests
         await scene.Click("load");
         AssertSavedState(savedFrame, savedPosition);
         Assert.That(ResumeLabel(), Is.EqualTo("再開"));
+        AssertSettings("ja", 0);
         await scene.Click("reset");
         Assert.That(scene.State().GetProperty("mode").GetString(), Is.EqualTo("title"));
         Assert.That(scene.State().GetProperty("seed").GetInt64(), Is.EqualTo(112));
+    }
+
+    private void AssertSettings(string locale, int size)
+    {
+        using var settings = JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "settings.json")));
+        Assert.That(settings.RootElement.GetProperty("locale").GetString(), Is.EqualTo(locale));
+        Assert.That(settings.RootElement.GetProperty("size").GetDouble(), Is.EqualTo(size));
     }
 
     private string? ResumeLabel()

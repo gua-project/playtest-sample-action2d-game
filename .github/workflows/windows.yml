@@ -37,13 +37,13 @@ jobs:
           ./scripts/ci-templates.ps1
       - name: Import and internal model checks (not Gua or Playtest E2E)
         shell: pwsh
-        run: ./scripts/verify.ps1 -Godot $env:GODOT_EXECUTABLE -IsolateImportExtension
+        run: ./scripts/verify.ps1 -Godot ($env:GODOT_EXECUTABLE -replace '\.exe$', '_console.exe') -IsolateImportExtension
       - name: Formal C# Gua source-scene regression
         shell: pwsh
         run: ./scripts/run-source-tests.ps1 -Godot $env:GODOT_EXECUTABLE -Restore
       - name: Package Windows EXE
         shell: pwsh
-        run: ./scripts/build-windows.ps1 -Godot $env:GODOT_EXECUTABLE -TemplateDirectory "$pwd/.deps/ci-godot/templates" -RecoveryExport
+        run: ./scripts/build-windows.ps1 -Godot ($env:GODOT_EXECUTABLE -replace '\.exe$', '_console.exe') -TemplateDirectory "$pwd/.deps/ci-godot/templates" -RecoveryExport
       - name: Distribution startup smoke only
         shell: pwsh
         run: ./scripts/run-exe-smoke.ps1

@@ -9,70 +9,70 @@
   "passed": 12,
   "failed": 0,
   "skipped": 0,
-  "trx": "output/source-regression-results/20261029T113014840/source-regression.trx",
+  "trx": "output/source-regression-results/20261029T113359376/source-regression.trx",
   "tests": [
     {
-      "duration": "00:00:01.0750350",
-      "name": "LanguageMenusFitTheLogicalViewport",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:00.7522839",
-      "name": "ResultScreenReplayResetsProgress",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:07.7211450",
-      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:01.7572100",
-      "name": "MenuPauseSaveLoadAndSourceRestart",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:07.6678780",
-      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:07.2191590",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:09.8727660",
-      "name": "DeathThenPauseDefersExactlyOneRespawn",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:07.3519420",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:07.0555630",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:00.7362770",
-      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:00.7503680",
-      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
-      "outcome": "Passed"
-    },
-    {
-      "duration": "00:00:00.8471470",
       "name": "InvalidSaveDoesNotChangeTheLiveState",
-      "outcome": "Passed"
+      "outcome": "Passed",
+      "duration": "00:00:00.8653490"
+    },
+    {
+      "name": "MenuPauseSaveLoadAndSourceRestart",
+      "outcome": "Passed",
+      "duration": "00:00:01.7909510"
+    },
+    {
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
+      "outcome": "Passed",
+      "duration": "00:00:07.3925820"
+    },
+    {
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)",
+      "outcome": "Passed",
+      "duration": "00:00:00.7445990"
+    },
+    {
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
+      "outcome": "Passed",
+      "duration": "00:00:00.7501870"
+    },
+    {
+      "name": "LanguageMenusFitTheLogicalViewport",
+      "outcome": "Passed",
+      "duration": "00:00:01.0351520"
+    },
+    {
+      "name": "ResultScreenReplayResetsProgress",
+      "outcome": "Passed",
+      "duration": "00:00:00.7626760"
+    },
+    {
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
+      "outcome": "Passed",
+      "duration": "00:00:07.0883180"
+    },
+    {
+      "name": "DeathThenPauseDefersExactlyOneRespawn",
+      "outcome": "Passed",
+      "duration": "00:00:09.8749250"
+    },
+    {
+      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
+      "outcome": "Passed",
+      "duration": "00:00:07.7589610"
+    },
+    {
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
+      "outcome": "Passed",
+      "duration": "00:00:07.1173020"
+    },
+    {
+      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
+      "outcome": "Passed",
+      "duration": "00:00:07.6291320"
     }
   ],
   "sourceSceneSha256": "c94fb7f26fc71a729474da9d2529e108ab073e8b9a1faa55dfc3fe6cc3a4a3ad",
-  "testSha256": "bfca18c3a349b6a126b595c21bb72bd8a4caaa90bbf293e0301297c152a7a63d",
+  "testSha256": "12e88d3d6bab4032b6fc14e5519dc3c64199fb355ae838986ff2fc614fe518b6",
   "fixtureSha256": "b56277974e96e157c422dde973496f37b9e780b465f2c905ca005a20ecea20ea"
 }

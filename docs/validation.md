@@ -4,11 +4,11 @@
 
 ゲームコード・Godot4.7・Gua1.1.2は変更せず、旧JS外部EXE runnerを退役。正式Gua.Testing/Gua.Testing.Godotのsource scene回帰、内部モデル回帰、起動だけの配布smokeへ整理した。現行結果はこの節に記録する。下記のEXE操作結果とCIは移行前の履歴であり、Playtest E2Eの成功ではない。Playtest側の統合は未実行。GUI承認未完了も維持する。独立レビュー既存1回は移行前のもので、今回の変更を独立監査済みとはしない。
 
-- 正式 NuGet 1.1.2 を locked restore、.NET 10でコンパイル。source scene回帰12件成功・失敗0・skip0。TRX: `output/source-regression-results/20261029T113014840/source-regression.trx`。各ケースに公式Observe/World/Diagnostics JSONと明示保存fixtureを添付。
+- 正式 NuGet 1.1.2 を locked restore、.NET 10でコンパイル。source scene回帰12件成功・失敗0・skip0。TRX: `output/source-regression-results/20261029T113359376/source-regression.trx`。各ケースに公式Observe/World/Diagnostics JSONと明示保存fixtureを添付。
 - import（既存拡張cacheも一時分離）、内部モデル32assert、source起動smoke成功。移行前のGDScript直接UI統合10assertは正式C#へ移したため現在の件数に加算しない。
 - 正式guarded UI/入力の完了をpollし、clockはSDKの `RunClockForAsync` を利用。観測待機は要求前のUI/Worldフレームを基準にする。連続移動は各固定ステップで同じSDK所有入力を更新する。更新なしで短い時計要求を反復する初期試行ではSDKのhost completion timeoutが発生したため、この更新なしの長時間保持契約は未検証として残す。独自wireへのフォールバック、SDK/addon改変はしていない。
 - B01はsoftlockにより荷物も復帰しないため、cargo位置の復元は正常版だけへ要求する。B02はcargo_lost、B03は同tickの死亡と配送の増加を個別期待値として判定。
-- 既存配布EXEの起動・読込・正常終了だけのsmoke成功（`output/distribution-smoke/20261029T113233342/`）。新CIの結果は追記する。配布EXEの操作/探索/再起動/Trace/ReplayはこのCIの対象外、Playtest E2Eは未実行。
+- 既存配布EXEの起動・読込・正常終了だけのsmoke成功（`output/distribution-smoke/20261029T113233342/`）。新CI初回はgua-testerの通常Windows engine EXEをPowerShellが待たず、import exit code未取得で失敗（run40807039810）。PowerShellのimport/exportだけ同じ公式archive内のconsole EXEへ変更し、source hostの通常EXEは維持した。新CIの結果は追記する。配布EXEの操作/探索/再起動/Trace/ReplayはこのCIの対象外、Playtest E2Eは未実行。
 - .NET CLI初回実行で開発証明書の作成を示すメッセージが出た。信頼操作は実行していない。以降のscript/CIは `DOTNET_GENERATE_ASPNET_CERTIFICATE=false` を指定した。証明書storeの変更有無は未判定で、追加のstore操作は行っていない。
 ## 移行前の検証履歴
 
