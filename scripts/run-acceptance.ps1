@@ -31,6 +31,8 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Gua acceptance failed' }
         node tests/exploration.mjs
         if ($LASTEXITCODE -ne 0) { throw 'Gua exploratory and B03 comparison failed' }
+        node tests/boundaries.mjs
+        if ($LASTEXITCODE -ne 0) { throw 'Gua edge/death-pause boundary checks failed' }
     } finally { Stop-Process -Id $process.Id -ErrorAction SilentlyContinue }
     $process = Start-Process @hostArgs
     try {

@@ -23,13 +23,14 @@
 - [設置/落下/再回収とB03正常比較](evidence/windows-exploration.json): 3項目passed。
 - [別プロセス再起動復元](evidence/windows-restart.json): passed。
 - [実時間の3配送](evidence/windows-realtime.json): 28,121ms、死亡0、passed。
+- [2026-10-29追加の足場端/死亡ポーズ](evidence/windows-boundaries.json): 実EXEの通常入力で2tick/8tickのジャンプ境界と、死亡直後のポーズ→一回復帰の3ケースpassed。既存の成功試験はローカル再実行せず、不足していたケースだけを追加。ゲーム本体とEXEは変更なし、独立レビュー回数も1回を維持。
 - raw wire: `output/runs/20261028T144658930-exe/`。run途中の失敗も別timestampディレクトリに保持。位置・状態の取得には異なるtree frameがあり、固定時計完了はUI/Worldの両フレームで待つ。
 
 ## 未完了・ブロッカー
 
 - メニュー寿命修正後の最終EXEも上記の固定・実時間全試験に成功。
 - GUI対象 `Delivery Robot Factory` のウィンドウ発見・起動まで実施。画面取得のアプリ承認が `Computer Use app approval timed out`。GUI入力は実行されず、対象PIDとパスを照合して終了、枠解放済み。画像／人間のキー入力・操作感・各実サイズの実表示は未検証。承認を迂回していない。音は未実装。
-- 外部Guaの同tickプレス境界と設置後落下は確認済み。足場端や着地直前の広範なタイミング探索、死亡とポーズの外部同時入力は未実施（モデルに代表ケースあり）。
+- 外部Guaの同tickプレス境界、設置後落下、足場端の2/8tick入力、死亡直後ポーズと再開を確認済み。足場端や着地直前の広範なタイミング探索は未実施（モデルに着地直前の代表ケースあり）。
 - Windows hosted CI のeditor終了時に `-1073741819` (0xC0000005) を検出。既存サンプル同様にimport中だけ拡張の自動ロードを分離し、exportには公式recovery modeを使用。実行前には必ず正式Guaを有効に戻し、生成EXEのバージョンと実通信をassertする。終了コードを無視せず、Windows runtime試験を省略していない。
 - **CI成功**: [run 40640580981](https://github.com/gua-project/playtest-sample-action2d-game/actions/runs/40640580981)、対象commit `9fb77fef69431d0e4775a1237414c7469308bc85`。公式依存取得、import、42項目、Windows export、実EXEの固定/実時間・3個別バグ比較・探索・再起動復元を通過。配布ZIPとraw wire/JSONは同runの `windows-evidence-<commit>` artifactに保存。
 - リモートは空リポジトリでmain/base commitなし。main bootstrap pushは制約に従い未実施。比較元がないためDraft PRはまだ作成不能。
