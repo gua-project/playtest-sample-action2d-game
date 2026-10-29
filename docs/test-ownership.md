@@ -11,7 +11,7 @@
 | 同 E06 / realtime.mjs R01 | 通常開始から3配送、死亡0。実時間/固定ステップを区別 | 将来Playtest E2E PT-A2D-DELIVERY / PT-A2D-REALTIME。現在のC#へ探索/走破policyを移植しない。過去成功は履歴のみ |
 | 同 E07 | 結果→再プレイで進行初期化 | C# `ResultScreenReplayResetsProgress`。明示保存fixtureから最後の配送だけを通常入力する短いsource回帰。3区間走破ではない |
 | 同 E08 | 正常落下復帰、B01停止、B02荷物消失 | C# `CargoFallDetectsOnlyTheSelectedKnownBug`。seed112、タイトルの個別フラグ、通常取得/落下で比較 |
-| restart-check.mjs E09 | 保存状態を別プロセスで復元 | sourceの再起動はC# Menuケース。配布EXEの再起動/所有権は将来Playtest PT-A2D-RESTORE |
+| restart-check.mjs E09 | 保存状態を別プロセスで復元 | sourceの再起動はC# MenuケースとNonDefaultProgressケース。配布EXEの再起動/所有権は将来Playtest PT-A2D-RESTORE |
 | exploration.mjs X01 | 設置→落下→復帰→回収を目的に探索 | 将来Playtest PT-A2D-RECOVER。探索driverはサンプルから削除。内部の荷物復元期待値はT07とsourceのCargoFallに保持 |
 | 同 E10 | ゴール/死亡同tick、正常死亡優先、B03だけ二重結果 | C# `PreparedDockContactGivesDeathPriorityUnlessBugEnabled`。明示saveをUIロードし通常move1tickで接触。Playtestの通常経路/探索とは別 |
 | boundaries.mjs X02 | 足場を離れて2/8tick後の入力 | C# `EdgeJumpRespectsCoyoteBoundary`。通常移動で端へ進み、2tickは上昇・8tickは落下 |
@@ -28,6 +28,6 @@
 
 ## 監査と結果の扱い
 
-独立レビューの既存1回を維持し、今回のC#・CI・責務整理は追加の独立監査をしていない。今回のコンパイル/ローカル実行/CI結果を別途 validation.md とTRXで報告する。失敗・未実行・API制約は成功/skipへ変換しない。SDK不足なら具体的な呼び出し・状態を報告し、サンプル独自runnerやwireで補完しない。
+独立レビューの既存1回を維持し、今回のC#・CI・責務整理は別枠の独立レビュー1回を実施し、3指摘を修正した（[記録](migration-review.md)）。今回のコンパイル/ローカル13件成功/CI結果を別途 validation.md とTRXで報告する。失敗・未実行・API制約は成功/skipへ変換しない。SDK不足なら具体的な呼び出し・状態を報告し、サンプル独自runnerやwireで補完しない。
 
 正式APIの正本: [Gua.Testing.Godot source host 1.1.2](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing.Godot/GodotSceneTestHost.cs)、[共通SDK](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaWebSocketContext.cs)、[guarded dispatch](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaRemoteGuardedDispatch.cs)。source UI回帰では要求前のstale_guard拒否だけを同epochの再観測・Locator再検証後に最大2回再要求する。enqueue後の拒否/不確実/timeoutを再要求で隠さない。

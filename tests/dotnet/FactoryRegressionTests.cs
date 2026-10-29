@@ -36,6 +36,7 @@ public sealed class FactoryRegressionTests
         var savedPosition = scene.Position();
         await scene.Step(60);
         Assert.That(scene.State().GetProperty("frame").GetInt64(), Is.EqualTo(savedFrame));
+        var savedState = scene.State();
         await scene.Click("save");
         await scene.Click("resume"); await scene.Input("move", 1); await scene.Step(30); await scene.Release();
         Assert.That(scene.Position().X, Is.GreaterThan(savedPosition.X));
@@ -43,7 +44,7 @@ public sealed class FactoryRegressionTests
         Assert.That(ResumeLabel(), Is.EqualTo("Resume"));
         AssertSettings("en", 1);
         await scene.Click("load");
-        AssertSavedState(savedFrame, savedPosition);
+        AssertSavedState(savedState, savedPosition);
         Assert.That(ResumeLabel(), Is.EqualTo("再開"));
         AssertSettings("ja", 0);
         scene.Evidence("loaded");
@@ -52,12 +53,22 @@ public sealed class FactoryRegressionTests
         scene = new SourceScene(directory, "restarted-source-scene");
         Assert.That(scene.State().GetProperty("mode").GetString(), Is.EqualTo("title"));
         await scene.Click("load");
-        AssertSavedState(savedFrame, savedPosition);
+        AssertSavedState(savedState, savedPosition);
         Assert.That(ResumeLabel(), Is.EqualTo("再開"));
         AssertSettings("ja", 0);
         await scene.Click("reset");
         Assert.That(scene.State().GetProperty("mode").GetString(), Is.EqualTo("title"));
         Assert.That(scene.State().GetProperty("seed").GetInt64(), Is.EqualTo(112));
+        await scene.Click("language"); await scene.Click("size");
+        AssertSettings("en", 1);
+        scene.Dispose(); scene = null!;
+        scene = new SourceScene(directory, "nondefault-settings-source-scene");
+        using (var ui = JsonDocument.Parse(scene.Client.GetUiTreeJson()))
+            Assert.That(ui.RootElement.GetProperty("nodes").EnumerateArray().Single(n => n.GetProperty("id").GetString() == "start").GetProperty("label").GetString(), Is.EqualTo("Start delivery"));
+        await scene.Start(); await scene.Click("pause"); await scene.Click("save");
+        using var persisted = JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "factory-save.json")));
+        Assert.That(persisted.RootElement.GetProperty("locale").GetString(), Is.EqualTo("en"));
+        Assert.That(persisted.RootElement.GetProperty("size").GetDouble(), Is.EqualTo(1));
     }
 
     private void AssertSettings(string locale, int size)
@@ -73,10 +84,11 @@ public sealed class FactoryRegressionTests
         return ui.RootElement.GetProperty("nodes").EnumerateArray().Single(n => n.GetProperty("id").GetString() == "resume").GetProperty("label").GetString();
     }
 
-    private void AssertSavedState(long frame, (double X, double Y) position)
+    private void AssertSavedState(JsonElement expected, (double X, double Y) position)
     {
         var state = scene.State();
-        Assert.That(state.GetProperty("frame").GetInt64(), Is.EqualTo(frame));
+        foreach (var key in new[] { "frame", "stage", "seed", "deaths", "deliveries", "carrying", "checkpoint", "bugs" })
+            Assert.That(state.GetProperty(key).GetRawText(), Is.EqualTo(expected.GetProperty(key).GetRawText()), key);
         Assert.That(state.GetProperty("paused").GetBoolean(), Is.True);
         Assert.That(scene.Position(), Is.EqualTo(position));
     }
@@ -189,6 +201,25 @@ public sealed class FactoryRegressionTests
     }
 
     [Test]
+    public async Task NonDefaultProgressSurvivesSaveLoadAndSourceRestart()
+    {
+        PrepareDockSave(128, "B03_DOUBLE_RESULT", deaths: 3);
+        await scene.Click("load"); AssertDockFixture(128);
+        Assert.That(scene.State().GetProperty("deaths").GetInt64(), Is.EqualTo(3));
+        Assert.That(scene.State().GetProperty("checkpoint").GetBoolean(), Is.True);
+        var expected = scene.State(); var position = scene.Position();
+        File.Delete(Path.Combine(directory, "factory-save.json")); // Remove setup file so Save must recreate it.
+        await scene.Click("save");
+        Assert.That(File.Exists(Path.Combine(directory, "factory-save.json")), Is.True);
+        await scene.Click("reset"); await scene.Start(); await scene.Click("pause");
+        Assert.That(scene.State().GetProperty("stage").GetInt64(), Is.Zero);
+        await scene.Click("load"); AssertSavedState(expected, position);
+        scene.Dispose(); scene = null!;
+        scene = new SourceScene(directory, "progress-source-restart");
+        await scene.Click("load"); AssertSavedState(expected, position);
+    }
+
+    [Test]
     public async Task ResultScreenReplayResetsProgress()
     {
         PrepareDockSave(128, ""); // Safe press phase. This tests the final transition, not a full journey.
@@ -204,12 +235,14 @@ public sealed class FactoryRegressionTests
         Assert.That(scene.Position(), Is.EqualTo((64.0, 478.0)));
     }
 
-    private void PrepareDockSave(int frame, string bug)
+    private void PrepareDockSave(int frame, string bug, int deaths = 0)
     {
         var fixturePath = Path.Combine(SourceScene.Root, "tests", "fixtures", "dock-save.json");
         TestContext.WriteLine("Prepared save SHA256: " + Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(fixturePath))));
         var document = JsonNode.Parse(File.ReadAllText(fixturePath))!;
         document["game"]!["frame"] = frame;
+        document["game"]!["deaths"] = deaths;
+        document["game"]!["outcomes"] = 2 + deaths;
         document["game"]!["bugs"] = bug == "" ? new JsonArray() : new JsonArray(JsonValue.Create(bug));
         var savePath = Path.Combine(directory, "factory-save.json");
         File.WriteAllText(savePath, document.ToJsonString());

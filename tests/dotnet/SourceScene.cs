@@ -49,8 +49,16 @@ internal sealed class SourceScene : IDisposable
             Client.WaitUntilAvailable(TimeSpan.FromSeconds(10));
             var version = Client.GetVersion();
             Assert.That(version.CoreVersion, Is.EqualTo("1.1.2"));
+            Assert.That(version.RuntimeVersion, Is.EqualTo("1.1.2"));
+            Assert.That(version.GodotPluginVersion, Is.EqualTo("1.1.2"));
             Published(Client.GetContextStatus().SessionEpoch).GetAwaiter().GetResult();
             Assert.That(State().GetProperty("seed").GetInt64(), Is.EqualTo(112));
+            input = Client.CreateGuardedDispatchSession();
+            using var map = JsonDocument.Parse(input.GetGameInputActionsJson());
+            var actions = map.RootElement.GetProperty("actions").EnumerateArray().ToArray();
+            Assert.That(actions.Length, Is.EqualTo(3));
+            foreach (var (id, type) in new[] { ("move", "axis1d"), ("jump", "button"), ("interact", "button") })
+                Assert.That(actions.Single(a => a.GetProperty("id").GetString() == id).GetProperty("valueType").GetString(), Is.EqualTo(type));
         }
         catch { Client?.Dispose(); Host.Dispose(); throw; }
     }

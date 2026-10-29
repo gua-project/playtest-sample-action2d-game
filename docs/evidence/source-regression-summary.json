@@ -5,74 +5,79 @@
   "guaTesting": "1.1.2",
   "guaTestingGodot": "1.1.2",
   "seed": 112,
-  "total": 12,
-  "passed": 12,
+  "total": 13,
+  "passed": 13,
   "failed": 0,
   "skipped": 0,
-  "trx": "output/source-regression-results/20261029T114544130/source-regression.trx",
+  "trx": "output/source-regression-results/20261029T115921371/source-regression.trx",
   "tests": [
     {
-      "outcome": "Passed",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
-      "duration": "00:00:07.1504500"
-    },
-    {
-      "outcome": "Passed",
-      "name": "ResultScreenReplayResetsProgress",
-      "duration": "00:00:01.0741540"
-    },
-    {
-      "outcome": "Passed",
-      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
-      "duration": "00:00:08.2435110"
-    },
-    {
-      "outcome": "Passed",
-      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
-      "duration": "00:00:00.7778940"
-    },
-    {
-      "outcome": "Passed",
-      "name": "DeathThenPauseDefersExactlyOneRespawn",
-      "duration": "00:00:09.7071900"
-    },
-    {
-      "outcome": "Passed",
-      "name": "MenuPauseSaveLoadAndSourceRestart",
-      "duration": "00:00:02.7208199"
-    },
-    {
-      "outcome": "Passed",
+      "duration": "00:00:01.4023040",
       "name": "InvalidSaveDoesNotChangeTheLiveState",
-      "duration": "00:00:00.8381000"
+      "outcome": "Passed"
     },
     {
-      "outcome": "Passed",
-      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
-      "duration": "00:00:07.6206670"
-    },
-    {
-      "outcome": "Passed",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
-      "duration": "00:00:07.4354580"
-    },
-    {
-      "outcome": "Passed",
-      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
-      "duration": "00:00:09.4480540"
-    },
-    {
-      "outcome": "Passed",
+      "duration": "00:00:02.1020000",
       "name": "LanguageMenusFitTheLogicalViewport",
-      "duration": "00:00:01.8397070"
+      "outcome": "Passed"
     },
     {
-      "outcome": "Passed",
+      "duration": "00:00:09.7834430",
+      "name": "DeathThenPauseDefersExactlyOneRespawn",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.3514310",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:01.5629260",
+      "name": "NonDefaultProgressSurvivesSaveLoadAndSourceRestart",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.0596820",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.7412930",
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.1863630",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:03.4073060",
+      "name": "MenuPauseSaveLoadAndSourceRestart",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.5763580",
+      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.6499010",
+      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.7613520",
       "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)",
-      "duration": "00:00:00.7408110"
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.9707230",
+      "name": "ResultScreenReplayResetsProgress",
+      "outcome": "Passed"
     }
   ],
-  "sourceSceneSha256": "c1236506ad4f37ea14c1708bcd7e418def6011a5ef589f62aa799c37f81c6946",
-  "testSha256": "1ab42cd9a3258b26625fd89cf16e73aeac25307fc7a5127e3d404c54e86623ab",
+  "sourceSceneSha256": "cbdc9a5b89d5b5c33da2d4ebcb3c3eb84adbd1e869e07001487f42b7b015bbe2",
+  "testSha256": "25e63f2a1cfde2697d5f88f0c045afa2ccc319de2bb40761c7a8948b17bc4eeb",
   "fixtureSha256": "b56277974e96e157c422dde973496f37b9e780b465f2c905ca005a20ecea20ea"
 }
