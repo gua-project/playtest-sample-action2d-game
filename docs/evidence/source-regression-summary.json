@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-29",
+  "layer": "source-scene regression, not distribution EXE or Playtest E2E",
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "guaTesting": "1.1.2",
+  "guaTestingGodot": "1.1.2",
+  "seed": 112,
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "skipped": 0,
+  "trx": "output/source-regression-results/20261029T115921371/source-regression.trx",
+  "tests": [
+    {
+      "duration": "00:00:01.4023040",
+      "name": "InvalidSaveDoesNotChangeTheLiveState",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:02.1020000",
+      "name": "LanguageMenusFitTheLogicalViewport",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:09.7834430",
+      "name": "DeathThenPauseDefersExactlyOneRespawn",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.3514310",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"\",False,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:01.5629260",
+      "name": "NonDefaultProgressSurvivesSaveLoadAndSourceRestart",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.0596820",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B01_PLATFORM_RESPAWN\",True,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.7412930",
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"B03_DOUBLE_RESULT\",3,4)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.1863630",
+      "name": "CargoFallDetectsOnlyTheSelectedKnownBug(\"B02_CARGO_LOSS\",False,True)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:03.4073060",
+      "name": "MenuPauseSaveLoadAndSourceRestart",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.5763580",
+      "name": "EdgeJumpRespectsCoyoteBoundary(2,True)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:07.6499010",
+      "name": "EdgeJumpRespectsCoyoteBoundary(8,False)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.7613520",
+      "name": "PreparedDockContactGivesDeathPriorityUnlessBugEnabled(\"\",2,3)",
+      "outcome": "Passed"
+    },
+    {
+      "duration": "00:00:00.9707230",
+      "name": "ResultScreenReplayResetsProgress",
+      "outcome": "Passed"
+    }
+  ],
+  "sourceSceneSha256": "cbdc9a5b89d5b5c33da2d4ebcb3c3eb84adbd1e869e07001487f42b7b015bbe2",
+  "testSha256": "25e63f2a1cfde2697d5f88f0c045afa2ccc319de2bb40761c7a8948b17bc4eeb",
+  "fixtureSha256": "b56277974e96e157c422dde973496f37b9e780b465f2c905ca005a20ecea20ea"
+}

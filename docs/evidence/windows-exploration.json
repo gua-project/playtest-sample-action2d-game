@@ -1,0 +1,223 @@
+{
+  "scenario": "factory-scenario-1",
+  "seed": 112,
+  "build": {
+    "sha256": "379fe8cdc69180e684cdea1fb10f7ada34bb0455dd11973eecc7bda2c7853263",
+    "commit": "b7e2e2ee05c7ff9ba4ec8636f62c21d552b05245"
+  },
+  "checks": [
+    "X01 place/fall/respawn/recover via ordinary input",
+    "E10 same-tick goal/death NORMAL",
+    "E10 same-tick goal/death B03_DOUBLE_RESULT"
+  ],
+  "cases": [
+    {
+      "test": "X01",
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 204,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 1,
+        "deliveries": 0,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "world": {
+        "cargo": {
+          "id": "cargo",
+          "kind": "object",
+          "label": "cargo",
+          "space": "world2d",
+          "position": {
+            "x": 145,
+            "y": 456
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        },
+        "checkpoint": {
+          "id": "checkpoint",
+          "kind": "object",
+          "label": "checkpoint",
+          "space": "world2d",
+          "position": {
+            "x": 835,
+            "y": 520
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        },
+        "goal": {
+          "id": "goal",
+          "kind": "object",
+          "label": "goal",
+          "space": "world2d",
+          "position": {
+            "x": 1530,
+            "y": 460
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        },
+        "platform": {
+          "id": "platform",
+          "kind": "object",
+          "label": "platform",
+          "space": "world2d",
+          "position": {
+            "x": 655.9006958007812,
+            "y": 485
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        },
+        "press": {
+          "id": "press",
+          "kind": "object",
+          "label": "press",
+          "space": "world2d",
+          "position": {
+            "x": 1100,
+            "y": 310
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        },
+        "robot": {
+          "id": "robot",
+          "kind": "object",
+          "label": "robot",
+          "space": "world2d",
+          "position": {
+            "x": 145,
+            "y": 478
+          },
+          "visibleToPlayer": false,
+          "active": true,
+          "agentExposure": "auto",
+          "tags": [],
+          "state": {}
+        }
+      }
+    },
+    {
+      "bug": "",
+      "before": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 607,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "after": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 608,
+        "carrying": false,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 1,
+        "deliveries": 2,
+        "outcomes": 3,
+        "paused": false,
+        "pending_respawn": true,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "death",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": 1501.9000244140625
+    },
+    {
+      "bug": "B03_DOUBLE_RESULT",
+      "before": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 607,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [
+          "B03_DOUBLE_RESULT"
+        ],
+        "press_active": false,
+        "grounded": true
+      },
+      "after": {
+        "mode": "result",
+        "stage": 2,
+        "frame": 608,
+        "carrying": false,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 1,
+        "deliveries": 3,
+        "outcomes": 4,
+        "paused": false,
+        "pending_respawn": true,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "delivery",
+        "seed": 112,
+        "bugs": [
+          "B03_DOUBLE_RESULT"
+        ],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": 1501.9000244140625
+    }
+  ],
+  "status": "passed"
+}

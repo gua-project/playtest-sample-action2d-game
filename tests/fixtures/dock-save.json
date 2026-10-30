@@ -1,0 +1,32 @@
+{
+  "game": {
+    "version": "factory-scenario-1",
+    "seed": 112,
+    "bugs": [],
+    "mode": "play",
+    "stage": 2,
+    "frame": 67,
+    "pos": [1499, 478],
+    "velocity": [0, 0],
+    "grounded": true,
+    "support": "floor",
+    "carrying": true,
+    "cargo": [1499, 456],
+    "cargo_lost": false,
+    "checkpoint": true,
+    "deaths": 0,
+    "deliveries": 2,
+    "outcomes": 2,
+    "pending_respawn": false,
+    "softlocked": false,
+    "paused": true,
+    "last_event": "regression_fixture",
+    "history": [],
+    "coyote": 6,
+    "buffer": 0,
+    "previous_jump": false,
+    "previous_interact": false
+  },
+  "locale": "ja",
+  "size": 0
+}

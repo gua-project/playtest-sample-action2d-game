@@ -1,0 +1,9 @@
+.godot/
+.deps/
+addons/gua/
+build/
+output/
+*.tmp
+**/bin/
+**/obj/
+**/TestResults/

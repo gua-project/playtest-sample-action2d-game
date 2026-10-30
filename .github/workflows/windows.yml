@@ -1,0 +1,61 @@
+name: Windows sample regression and packaging smoke
+on:
+  push:
+    branches: ['feat/**', main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: 'false'
+  DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Set up existing engine version with gua-tester
+        uses: gua-project/gua-tester/setup-godot@9a819e252d714ecec80d0d206f3c8894cb8a13a1 # v3.2
+        with:
+          godot-version: '4.7'
+          godot-status: stable
+      - name: Link formal Gua addon with gua-tester
+        uses: gua-project/gua-tester/link-gua-gdscript-addon@9a819e252d714ecec80d0d206f3c8894cb8a13a1 # v3.2
+        with:
+          project-path: '.'
+          gua-plugin-tag: gua-v1.1.2
+      - name: Verify pinned dependencies and obtain Windows templates
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force .deps | Out-Null
+          Copy-Item "$env:RUNNER_TEMP/gua-godot-addon-gua-v1.1.2/gua-godot-addon-v1.1.2.zip" .deps/
+          ./scripts/install-gua.ps1
+          ./scripts/ci-templates.ps1
+      - name: Import and internal model checks (not Gua or Playtest E2E)
+        shell: pwsh
+        run: ./scripts/verify.ps1 -Godot ($env:GODOT_EXECUTABLE -replace '\.exe$', '_console.exe') -IsolateImportExtension
+      - name: Formal C# Gua source-scene regression
+        shell: pwsh
+        run: ./scripts/run-source-tests.ps1 -Godot $env:GODOT_EXECUTABLE -Restore
+      - name: Package Windows EXE
+        shell: pwsh
+        run: ./scripts/build-windows.ps1 -Godot ($env:GODOT_EXECUTABLE -replace '\.exe$', '_console.exe') -TemplateDirectory "$pwd/.deps/ci-godot/templates" -RecoveryExport
+      - name: Distribution startup smoke only
+        shell: pwsh
+        run: ./scripts/run-exe-smoke.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sample-regression-${{ github.sha }}
+          path: |
+            build/DeliveryFactory-windows.zip
+            output/*.log
+            output/build-sha256.txt
+            output/source-regression-results/
+            output/source-regression/
+            output/distribution-smoke/
+          retention-days: 14

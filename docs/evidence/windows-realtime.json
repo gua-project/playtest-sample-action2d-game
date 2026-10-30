@@ -1,0 +1,1708 @@
+{
+  "test": "R01 real-time EXE normal-input route",
+  "scenario": "factory-scenario-1",
+  "seed": 112,
+  "bugs": [],
+  "build": {
+    "sha256": "379fe8cdc69180e684cdea1fb10f7ada34bb0455dd11973eecc7bda2c7853263",
+    "commit": "b7e2e2ee05c7ff9ba4ec8636f62c21d552b05245"
+  },
+  "samples": [
+    {
+      "elapsedMs": 51,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 2,
+        "carrying": false,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "stage_ready",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 64,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 632,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 37,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 187.98326110839844,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 1073,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 63,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 263.38311767578125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 1526,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 91,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 344.58294677734375,
+        "y": 447.375
+      }
+    },
+    {
+      "elapsedMs": 1984,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 118,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 422.8827819824219,
+        "y": 403
+      }
+    },
+    {
+      "elapsedMs": 2515,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 150,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": false
+      },
+      "position": {
+        "x": 515.6826171875,
+        "y": 331.4583435058594
+      }
+    },
+    {
+      "elapsedMs": 2957,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 177,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 593.9832763671875,
+        "y": 398
+      }
+    },
+    {
+      "elapsedMs": 3450,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 206,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 678.083984375,
+        "y": 330.0833435058594
+      }
+    },
+    {
+      "elapsedMs": 3895,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 233,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 756.3846435546875,
+        "y": 388.9583435058594
+      }
+    },
+    {
+      "elapsedMs": 4394,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 263,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 843.3853759765625,
+        "y": 417.375
+      }
+    },
+    {
+      "elapsedMs": 4827,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 288,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 918.7860107421875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 5269,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 315,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 994.1866455078125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 5772,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 345,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1037.68701171875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 6200,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 371,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1037.68701171875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 6649,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 398,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1037.68701171875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 7082,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 424,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1037.68701171875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 7545,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 451,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1104.3875732421875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 7954,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 476,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1173.9881591796875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 8401,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 503,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1252.288818359375,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 8829,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 528,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1327.689453125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 9254,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 554,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1400.1900634765625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 9664,
+      "state": {
+        "mode": "play",
+        "stage": 0,
+        "frame": 579,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 0,
+        "outcomes": 0,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1472.690673828125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 10085,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 15,
+        "carrying": false,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "stage_ready",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 125.25003814697266,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 10582,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 45,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 218.16653442382812,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 10993,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 69,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 287.7663879394531,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 11458,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 97,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 371.8662109375,
+        "y": 412.375
+      }
+    },
+    {
+      "elapsedMs": 11904,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 124,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 447.26605224609375,
+        "y": 403
+      }
+    },
+    {
+      "elapsedMs": 12362,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 151,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": false
+      },
+      "position": {
+        "x": 528.466064453125,
+        "y": 328.0416564941406
+      }
+    },
+    {
+      "elapsedMs": 12864,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 181,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 612.5667724609375,
+        "y": 398
+      }
+    },
+    {
+      "elapsedMs": 13311,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 208,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 690.867431640625,
+        "y": 324.1111145019531
+      }
+    },
+    {
+      "elapsedMs": 13797,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 237,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 777.8681640625,
+        "y": 403
+      }
+    },
+    {
+      "elapsedMs": 14245,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 264,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 856.1688232421875,
+        "y": 432.0694580078125
+      }
+    },
+    {
+      "elapsedMs": 14676,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 290,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 948.66943359375,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 15154,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 319,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1035.8199462890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 15589,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 345,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1035.8199462890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 16038,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 372,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1035.8199462890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 16483,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 399,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1035.8199462890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 16929,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 425,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1035.8199462890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 17405,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 454,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1111.2205810546875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 17855,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 481,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1186.6212158203125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 18258,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 505,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1256.2218017578125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 18703,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 532,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1334.5224609375,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 19109,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 556,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1404.123046875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 19542,
+      "state": {
+        "mode": "play",
+        "stage": 1,
+        "frame": 582,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 1,
+        "outcomes": 1,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1479.523681640625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 20028,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 21,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 150.28334045410156,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 20503,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 50,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 231.48316955566406,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 20923,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 75,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 303.9830322265625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 21394,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 103,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": false
+      },
+      "position": {
+        "x": 388.0828552246094,
+        "y": 404.1111145019531
+      }
+    },
+    {
+      "elapsedMs": 21854,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 131,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 466.3826904296875,
+        "y": 403
+      }
+    },
+    {
+      "elapsedMs": 22311,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 158,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 544.682861328125,
+        "y": 332.5
+      }
+    },
+    {
+      "elapsedMs": 22768,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 186,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 625.883544921875,
+        "y": 398
+      }
+    },
+    {
+      "elapsedMs": 23233,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 214,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": false
+      },
+      "position": {
+        "x": 707.084228515625,
+        "y": 325.9583435058594
+      }
+    },
+    {
+      "elapsedMs": 23696,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 242,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 788.284912109375,
+        "y": 403
+      }
+    },
+    {
+      "elapsedMs": 24146,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 268,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": false,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "air",
+        "last_event": "cargo_picked",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": false
+      },
+      "position": {
+        "x": 863.685546875,
+        "y": 446.4444580078125
+      }
+    },
+    {
+      "elapsedMs": 24561,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 293,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 959.9361572265625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 25009,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 321,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1064.8868408203125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 25437,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 346,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1137.387451171875,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 25889,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 373,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1215.6881103515625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 26336,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 400,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1293.98876953125,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 26796,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 427,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": false,
+        "grounded": true
+      },
+      "position": {
+        "x": 1372.2894287109375,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 27244,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 454,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1450.590087890625,
+        "y": 478
+      }
+    },
+    {
+      "elapsedMs": 27711,
+      "state": {
+        "mode": "play",
+        "stage": 2,
+        "frame": 482,
+        "carrying": true,
+        "cargo_lost": false,
+        "checkpoint": true,
+        "deaths": 0,
+        "deliveries": 2,
+        "outcomes": 2,
+        "paused": false,
+        "pending_respawn": false,
+        "softlocked": false,
+        "support": "floor",
+        "last_event": "checkpoint",
+        "seed": 112,
+        "bugs": [],
+        "press_active": true,
+        "grounded": true
+      },
+      "position": {
+        "x": 1453.4901123046875,
+        "y": 478
+      }
+    }
+  ],
+  "final": {
+    "mode": "result",
+    "stage": 2,
+    "frame": 506,
+    "carrying": true,
+    "cargo_lost": false,
+    "checkpoint": true,
+    "deaths": 0,
+    "deliveries": 3,
+    "outcomes": 3,
+    "paused": false,
+    "pending_respawn": false,
+    "softlocked": false,
+    "support": "floor",
+    "last_event": "delivery",
+    "seed": 112,
+    "bugs": [],
+    "press_active": false,
+    "grounded": true
+  },
+  "status": "passed",
+  "elapsedMs": 28121
+}
