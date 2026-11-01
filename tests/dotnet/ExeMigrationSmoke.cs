@@ -21,6 +21,13 @@ public sealed class ExeMigrationSmoke
         var directory = Path.Combine(SourceScene.Root, "output", "exe-migration-smoke", DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff"));
         Directory.CreateDirectory(directory);
         var log = Path.Combine(directory, "startup.log");
+        string ReadLog()
+        {
+            // Godot keeps its log open for writing until exit.
+            using var stream = new FileStream(log, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
+        }
         var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true };
         foreach (var arg in new[] { "--headless", "--log-file", log }) start.ArgumentList.Add(arg);
         start.Environment["GUA_BRIDGE_PORT"] = "18245";
@@ -36,7 +43,7 @@ public sealed class ExeMigrationSmoke
             var startup = "";
             while (DateTime.UtcNow < readyDeadline && !process.HasExited)
             {
-                if (File.Exists(log)) startup = File.ReadAllText(log);
+                if (File.Exists(log)) startup = ReadLog();
                 Assert.That(startup, Does.Not.Contain("ERROR:"));
                 if (startup.Contains("FACTORY_READY bridge=ws://127.0.0.1:18245 gua=1.2.0 fixed_clock=false")) break;
                 await Task.Delay(20);
@@ -81,7 +88,7 @@ public sealed class ExeMigrationSmoke
             Assert.That(X(), Is.GreaterThan(before + 1));
             File.WriteAllText(Path.Combine(directory, "observe.json"), client.GetObserveSnapshotJson());
             File.WriteAllText(Path.Combine(directory, "exe-sha256.txt"), Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(executable))));
-            Assert.That(File.ReadAllText(log), Does.Not.Contain("ERROR:"));
+            Assert.That(ReadLog(), Does.Not.Contain("ERROR:"));
             TestContext.AddTestAttachment(log);
             TestContext.AddTestAttachment(Path.Combine(directory, "observe.json"));
         }
