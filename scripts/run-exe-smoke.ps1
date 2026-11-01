@@ -42,6 +42,10 @@ try {
         [ordered]@{ schemaVersion = 1; purpose = 'QA sample using public Development remote-ON SDK';
             guaVersion = '1.2.0'; addonArchiveSha256 = 'effcad4cfc6083528bee4e469e171047cd9d2d49547a09d16be04845fcda7873';
             gameCommit = (git -C $root rev-parse HEAD); workingTreeDirty = [bool](git -C $root status --porcelain);
+            workingTreeStatus = @(git -C $root status --porcelain);
+            sourceFiles = @('project.godot','main.tscn','scripts/main.gd','scripts/factory.gd','export_presets.cfg' | ForEach-Object {
+                @{ path = $_; sha256 = (Get-FileHash (Join-Path $root $_)).Hash.ToLowerInvariant() }
+            });
             compiledGua = $identity; files = @($files | Sort-Object Name | ForEach-Object {
                 @{ path = $_.Name; sha256 = (Get-FileHash $_.FullName).Hash.ToLowerInvariant() }
             }) } | ConvertTo-Json -Depth 10 | Set-Content (Join-Path $package 'sample-build-manifest.json')
