@@ -19,8 +19,20 @@ try {
         dotnet restore $project --configfile NuGet.Config --locked-mode
         if ($LASTEXITCODE -ne 0) { throw 'Pinned Gua/NUnit restore failed' }
     }
+    # Public test SDK packages intentionally contain Development/remote-ON natives.
+    foreach ($id in @('gua.core','gua.testing','gua.testing.godot')) {
+        [xml]$metadata = Get-Content (Join-Path $env:NUGET_PACKAGES "$id/1.2.0/$id.nuspec") -Raw
+        $repository = $metadata.SelectSingleNode('//*[local-name()="repository"]')
+        if ($repository.commit -ne '2e12fb3cfdf822418f349515027d6f620c5ee63b') { throw "Unexpected NuGet source: $id" }
+    }
+    $native = Join-Path $env:NUGET_PACKAGES 'gua.core/1.2.0/runtimes/win-x64/native'
+    $manifest = Get-Content (Join-Path $native 'gua-core-build-manifest.json') -Raw | ConvertFrom-Json
+    if ($manifest.build.flavor -ne 'development' -or $manifest.build.remoteEnabled -ne $true -or
+        $manifest.build.remotePermissionCeiling -ne 'debug' -or $manifest.build.sourceCommit -ne '2e12fb3cfdf822418f349515027d6f620c5ee63b') { throw 'Unexpected NuGet compiled build manifest' }
+    $coreEntry = @($manifest.files | Where-Object path -eq 'gua.dll')
+    if ($coreEntry.Count -ne 1 -or (Get-FileHash (Join-Path $native 'gua.dll')).Hash.ToLowerInvariant() -ne $coreEntry[0].sha256) { throw 'NuGet core native hash mismatch' }
     $results = 'output/source-regression-results/' + (Get-Date -Format 'yyyyMMddTHHmmssfff')
-    dotnet test $project --no-restore --logger 'trx;LogFileName=source-regression.trx' --results-directory $results
+    dotnet test $project --no-restore --filter TestCategory=SourceRegression --logger 'trx;LogFileName=source-regression.trx' --results-directory $results
     if ($LASTEXITCODE -ne 0) { throw 'Source-scene Gua regression failed' }
 } finally {
     Pop-Location

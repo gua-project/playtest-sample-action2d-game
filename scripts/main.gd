@@ -81,6 +81,13 @@ func label_at(at: Vector2, font_size: int) -> Label:
 func setup_gua() -> void:
 	gua = Adapter.new()
 	gua.attach(self)
+	# This QA sample deliberately uses the public Development/remote-ON SDK.
+	# A port/environment setting cannot turn a Shipping/OFF binary into QA.
+	var build_info: Dictionary = gua.get_build_info()
+	print("FACTORY_GUA_BUILD_INFO=" + JSON.stringify(build_info))
+	if build_info.get("flavor") != "development" or not build_info.get("remoteEnabled", false) or build_info.get("remotePermissionCeiling") != "debug" or build_info.get("sourceCommit") != "2e12fb3cfdf822418f349515027d6f620c5ee63b":
+		push_error("Expected official Gua 1.2.0 Development remote-ON Debug-ceiling build")
+		return
 	gua.game_input_action_changed.connect(func(id: String, value: Variant):
 		if semantic.has(id):
 			semantic[id] = value)
@@ -116,7 +123,7 @@ func setup_gua() -> void:
 		observer.observe(key, observed_value.bind(key))
 	observer.observe("press_active", func(): return {"type": "bool", "value": game.press_active()})
 	observer.observe("grounded", func(): return {"type": "bool", "value": game.grounded})
-	print("FACTORY_READY bridge=%s gua=1.1.2 fixed_clock=%s scenario=%s" % [gua.inspector_bridge_url(), fixed_clock, Model.VERSION])
+	print("FACTORY_READY bridge=%s gua=1.2.0 fixed_clock=%s scenario=%s" % [gua.inspector_bridge_url(), fixed_clock, Model.VERSION])
 
 func observed_value(key: String) -> Dictionary:
 	var value: Variant = game.snapshot()[key]

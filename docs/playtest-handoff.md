@@ -5,13 +5,15 @@
 ## 固定対象
 
 - 対象: `build/DeliveryFactory-windows.zip` をフォルダごと展開した `DeliveryFactory.exe` とGua DLL。
-- エンジン: Godot4.7 stable、Gua正式1.1.2。ゲーム/シナリオ内容版 `factory-scenario-1`。この文字列はPlaytest Scenario definitionVersionやGuaライブラリbuildIdとは別。
+- エンジン: Godot4.7 stable、Gua正式1.2.0。ゲーム/シナリオ内容版 `factory-scenario-1`。この文字列はPlaytest Scenario definitionVersionやGuaライブラリbuildIdとは別。
 - 実ゲームbuild: 選択したCI artifactのHEAD・EXE SHA256・ZIP SHA256を実行前に固定する。現在のexportの値は `output/build-sha256.txt` とCI artifactを使う。Gua `get_version.buildId` をゲームbuildIdとして使わない。ホスト/fixtureによる実build identityの確認はPlaytestの接続要件として残す。
 - seed112、既定bugs=[]。既知バグ比較はB01/B02/B03を一つずつ有効化。初期状態はタイトルから通常Start、またはEnvironmentで明示承認した保存fixture。fixtureを使った結果を通常Startからの走破と呼ばない。
-- このrepoの専用portは18241（source回帰）、18244（限定配布smoke）、GUI使用時のみ18242。Playtest実行では別の明示port/save/outputをEnvironmentに与え、既存プロセスや他repoの保存を共有しない。
+- このrepoの専用portは18241（source回帰）、18244（起動・identity smoke）、18245（最小EXE SDK smoke）、GUI使用時のみ18242。Playtest実行では別の明示port/save/outputをEnvironmentに与え、既存プロセスや他repoの保存を共有しない。
 - 起動パラメータ/保存: `GUA_BRIDGE_PORT`、`FACTORY_SAVE_DIR`、`--log-file <run専用path>`。通常実時間と `-- --fixed-clock` を区別する。仮想時計の対応確認・操作リース・cleanup/attach権限はPlaytestが所有する。
 - 観測: UI `start/pause/resume/save/load/reset/replay/language/size`、world object `robot/cargo/platform/press/goal/checkpoint` の標準position。world Observe `mode/stage/frame/carrying/cargo_lost/checkpoint/deaths/deliveries/outcomes/paused/pending_respawn/softlocked/support/last_event/seed/bugs/press_active/grounded`。Observeは既定Debug。公開profileの選択を独自に上書きしない。
 - 通常入力: move(axis1d -1..1)、jump(button hold/release)、interact(button edge)。専用clear操作なし。
+
+Gua配布用途はDevelopment/remote ON、Debug上限、source commit `2e12fb3cfdf822418f349515027d6f620c5ee63b`。実EXEのcompiled identityと同梱ファイルhashは `sample-build-manifest.json` を確認する。Player限定のAI-player artifactではない。上限は実行権限付与ではなく、Player projection/allowlistはGua契約に従う。実時間hold後の明示release相関完了timeoutが未解決であり、Playtest連携時も成功に読み替えない。
 
 ## Scenario/Environment候補と独立期待値
 

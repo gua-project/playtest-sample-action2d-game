@@ -6,10 +6,11 @@
 |---|---|---|---|
 | 内部モデル回帰 | `scripts/verify.ps1` → `tests/model_tests.gd` | seed再現、物理、境界、保存モデル、既知バグの正常/注入比較。内部状態を準備するfixtureを使う | Gua UI・配布EXE・Playtest E2E |
 | 正式Gua source回帰 | `scripts/run-source-tests.ps1 -Restore` → `tests/dotnet/FactoryRegressionTests.cs` | GodotSceneTestHostで`res://main.tscn`を起動し、正式UI/Game Input・Observe・Worldで固定ケースを検証 | 配布EXEの受入、探索policy、通常3区間走破、画像・実サイズ・人間の操作感 |
-| 配布起動smoke | `scripts/run-exe-smoke.ps1` | EXEのリソース/DLL読込、起動マーカー、エラーログなしの正常終了 | 外部接続・操作・探索・Goal判定・Trace/Recording/Replay |
+| 配布起動smoke | `scripts/run-exe-smoke.ps1` | EXEのリソース/DLL読込、起動マーカー、実compiled identity・DLL hash・manifest、エラーログなしの正常終了 | 外部接続・操作・探索・Goal判定・Trace/Recording/Replay |
+| 最小EXE SDK smoke | `ExeMigrationSmoke`（READMEの明示コマンド） | 専用port18245でheadless起動、正式SDK接続、通常start、move一回の変位 | 明示release/lease/cleanupの保証、走破・探索・Scenario・Trace/Replay・Playtest E2E |
 | Playtest E2E | [接続情報と独立期待値](playtest-handoff.md) | 配布EXEのlaunch/attach、Scenario/Environment、探索、予算・中断・cleanup、Run/Result、Trace/Recording/Replay | サンプルrepoに代替runnerを置かない。統合は未実行 |
 
-Godot4.7、正式Gua.Testing/Gua.Testing.Godot 1.1.2、seed112、bugs=[]が既定。既知バグ比較だけ対応IDを一つ有効化する。ケースの初期条件・手順・期待結果は [test-matrix.md](test-matrix.md)、実行コマンドと依存は [README](../README.md#開発ビルド) を参照する。
+Godot4.7、正式Gua.Testing/Gua.Testing.Godot 1.2.0、seed112、bugs=[]が既定。既知バグ比較だけ対応IDを一つ有効化する。ケースの初期条件・手順・期待結果は [test-matrix.md](test-matrix.md)、実行コマンドと依存は [README](../README.md#開発ビルド) を参照する。
 
 ## 実行方法
 
@@ -30,9 +31,9 @@ source回帰はゲームのSemantic UIと標準Game Inputを使う。モデル�
 
 時計はSDKの`RunClockForAsync`を使用する。完了後のUI/Worldフレームより新しいObserve documentのuiFrame/worldFrameと、登録値のavailable状態を揃えてから判定する。起動時にも同じreadinessを待つ。C# TimeSpanの精度に合わせた時計stepは16.6667msであり、ゲーム側の固定60Hz以外の物理schedulerは持たない。連続移動の固定回帰では同じSDK所有入力を各stepで更新する。更新なしの長時間保持入力契約は未検証。
 
-source起動時にはcore/runtime/Godot plugin各versionが1.1.2、標準入力mapがちょうど3件（move:axis1d、jump:button、interact:button）であることを確認する。Observeの利用不能や環境エラーを既知バグ検出や成功に読み替えない。
+source起動時にはcore/runtime/Godot plugin各versionが1.2.0、標準入力mapがちょうど3件（move:axis1d、jump:button、interact:button）であることを確認する。Observeの利用不能や環境エラーを既知バグ検出や成功に読み替えない。
 
-正本: [source host](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing.Godot/GodotSceneTestHost.cs)、[共通SDK](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaWebSocketContext.cs)、[guarded dispatch](https://github.com/gua-project/gua/blob/gua-v1.1.2/bindings/dotnet/src/Gua.Testing/GuaRemoteGuardedDispatch.cs)。
+正本: [source host](https://github.com/gua-project/gua/blob/gua-v1.2.0/bindings/dotnet/src/Gua.Testing.Godot/GodotSceneTestHost.cs)、[共通SDK](https://github.com/gua-project/gua/blob/gua-v1.2.0/bindings/dotnet/src/Gua.Testing/GuaWebSocketContext.cs)、[guarded dispatch](https://github.com/gua-project/gua/blob/gua-v1.2.0/bindings/dotnet/src/Gua.Testing/GuaRemoteGuardedDispatch.cs)。
 
 ## 保存fixtureと独立期待値
 
@@ -55,3 +56,5 @@ GUI画像・実サイズ・ネイティブ入力・操作感は未検証。Playt
 足場端や着地直前の広範なタイミング探索は未実施。モデルT10は着地直前の代表ケース、source X02は足場離脱2/8tick後の代表ケースであり、全タイミングの成立を保証しない。
 
 実行日時・対象SHA・結果・旧ケースの移行対応は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) を参照する。旧EXE試行はPlaytest Run/Traceではなく、現在のHEADの成功証拠でもない。ローカルのraw/ログパスはGitへの保存を意味せず、期限付きCI artifactの長期可用性も保証しない。保存済みの [証拠JSON](evidence/) は元の対象と判定範囲を保って扱う。
+
+実時間hold後の明示releaseは相関完了がEnqueuedのままtimeoutする現象が残る。最小EXE smokeの合格にrelease/lease/切断cleanupを含めず、固定時計source回帰の成功で代替しない。

@@ -22,6 +22,13 @@ internal sealed class SourceScene : IDisposable
 
     public SourceScene(string directory, string instance = "scene")
     {
+        using (var native = JsonDocument.Parse(GuaBuildInfo.GetJson()))
+        {
+            Assert.That(native.RootElement.GetProperty("flavor").GetString(), Is.EqualTo("development"));
+            Assert.That(native.RootElement.GetProperty("remoteEnabled").GetBoolean(), Is.True);
+            Assert.That(native.RootElement.GetProperty("remotePermissionCeiling").GetString(), Is.EqualTo("debug"));
+            Assert.That(native.RootElement.GetProperty("sourceCommit").GetString(), Is.EqualTo("2e12fb3cfdf822418f349515027d6f620c5ee63b"));
+        }
         Directory = directory;
         System.IO.Directory.CreateDirectory(directory);
         var appData = Path.Combine(directory, "appdata");
@@ -48,9 +55,9 @@ internal sealed class SourceScene : IDisposable
             Client = new GuaWebSocketContext($"ws://127.0.0.1:{Port}");
             Client.WaitUntilAvailable(TimeSpan.FromSeconds(10));
             var version = Client.GetVersion();
-            Assert.That(version.CoreVersion, Is.EqualTo("1.1.2"));
-            Assert.That(version.RuntimeVersion, Is.EqualTo("1.1.2"));
-            Assert.That(version.GodotPluginVersion, Is.EqualTo("1.1.2"));
+            Assert.That(version.CoreVersion, Is.EqualTo("1.2.0"));
+            Assert.That(version.RuntimeVersion, Is.EqualTo("1.2.0"));
+            Assert.That(version.GodotPluginVersion, Is.EqualTo("1.2.0"));
             Published(Client.GetContextStatus().SessionEpoch).GetAwaiter().GetResult();
             Assert.That(State().GetProperty("seed").GetInt64(), Is.EqualTo(112));
             input = Client.CreateGuardedDispatchSession();
