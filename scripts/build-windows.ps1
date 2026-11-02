@@ -27,6 +27,8 @@ try {
     Write-Host "Godot export exit=$exportExit recovery=$RecoveryExport"
     if ($exportExit -ne 0 -or (Select-String output/export.log -Pattern 'ERROR:|SCRIPT ERROR' -Quiet)) { throw "Windows export failed: exit=$exportExit" }
     Copy-Item README.md,assets/OFL-MPLUS1p.txt,addons/gua/LICENSE build/windows/
+    # Validate the actual exported runtime, not only the DLL name or Release label.
+    & (Join-Path $PSScriptRoot 'run-exe-smoke.ps1') -Executable (Join-Path $root 'build/windows/DeliveryFactory.exe')
     Get-FileHash build/windows/DeliveryFactory.exe -Algorithm SHA256 | Format-List | Out-File output/build-sha256.txt
     Compress-Archive build/windows/* build/DeliveryFactory-windows.zip -Force
 } finally { $env:APPDATA = $oldApp; $env:LOCALAPPDATA = $oldLocal; $env:TEMP=$oldTemp; $env:TMP=$oldTmp; Pop-Location }

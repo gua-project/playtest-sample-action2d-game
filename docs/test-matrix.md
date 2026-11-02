@@ -1,6 +1,8 @@
 # issue #1・実装・テスト契約
 
-Godot4.7 / 正式Gua1.1.2 / 内容版`factory-scenario-1` / seed112 / bugs=[]を既定とする。バグ比較は指定IDだけを有効化する。実行層とfixtureの詳細は [testing.md](testing.md)、実行方法は [README](../README.md#開発ビルド) を参照。下記は期待値であり、実行成功の一覧ではない。実行日時・対象build・結果は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) に分離する。
+Godot4.7 / 正式Gua1.2.0 / 内容版`factory-scenario-1` / seed112 / bugs=[]を既定とする。バグ比較は指定IDだけを有効化する。実行層とfixtureの詳細は [testing.md](testing.md)、実行方法は [README](../README.md#開発ビルド) を参照。下記は期待値であり、実行成功の一覧ではない。実行日時・対象build・結果は [PRの証拠対応](https://github.com/gua-project/playtest-sample-action2d-game/pull/2#issuecomment-6494357576) に分離する。
+
+最小配布互換性チェック `ExeMigrationSmoke` はseed112/bugs=[]、新規保存先、port18245、通常実時間で開始する。正式UIのstart→move=1.0を一回送信し、相関完了とrobot.xの1px超の増加を期待する。明示release/lease/切断cleanup、走破・既知バグ検出・Playtest E2Eをこの一例で代用しない。明示releaseの完了timeoutは未解決の制限として [testing.md](testing.md) に記載する。
 
 ## 内部モデル回帰
 
@@ -28,7 +30,7 @@ Godot4.7 / 正式Gua1.1.2 / 内容版`factory-scenario-1` / seed112 / bugs=[]を
 
 | 対応ID・ケース | 初期条件・手順 | 独立した期待結果 |
 |---|---|---|
-| E01/E02・各source起動 | version、Observe、標準入力mapを正式SDKで取得 | core/runtime/Godot plugin各1.1.2、Observe18項目以上available、actionがexact3件でmove:axis1d、jump/interact:button |
+| E01/E02・各source起動 | version、Observe、標準入力mapを正式SDKで取得 | core/runtime/Godot plugin各1.2.0、Observe18項目以上available、actionがexact3件でmove:axis1d、jump/interact:button |
 | E03–05/E09/U02–03・MenuPauseSaveLoadAndSourceRestart | 通常Start→6tick→Pause→60tick→Save。Resumeで移動し言語/サイズ変更後Load、さらにsource再起動後Load | pause中frame不変。保存前のframe/stage/seed/deaths/deliveries/carrying/checkpoint/bugsとpositionを両経路で復元、paused=true。変更した英語/size1から保存済み日本語/size0へ戻る |
 | U03・同ケースの設定初期化 | titleでUIからen/size1を保存→source再起動→Start/Pause/Save | Startの英語表示と新しいゲーム保存payloadのlocale=en/size1。既定値への一致だけで初期化を判定しない |
 | E09・NonDefaultProgressSurvivesSaveLoadAndSourceRestart | 明示dock fixtureでstage2/deliveries2/deaths3/所持・checkpoint=true/B03のみ/frame128。準備ファイル削除後UI Save→Reset/Start→Load、source再起動→Load | Saveがファイルを再生成し、保存前の旧7キー＋bugs、position/pausedを両経路で復元 |

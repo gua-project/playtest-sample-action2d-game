@@ -1,6 +1,6 @@
 # 配送ロボットの工場
 
-Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1](https://github.com/gua-project/playtest-sample-action2d-game/issues/1) のアクション QA サンプルです。仮素材で実装しています。
+Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.2.0**。issue [#1](https://github.com/gua-project/playtest-sample-action2d-game/issues/1) のアクション QA サンプルです。仮素材で実装しています。
 
 荷物を拾い、足場とプレスを越え、緑の配送口へ届けます。基本移動、コンベアを含む運搬、配送口と危険ゲートが近接する複合障害の3ステージです。
 
@@ -34,16 +34,32 @@ Godot **4.7 stable** / **Windows x64 限定** / 正式 **Gua 1.1.2**。issue [#1
 ./scripts/verify.ps1
 ./scripts/run-source-tests.ps1 -Restore # 正式C# APIでsource sceneの固定回帰
 ./scripts/build-windows.ps1
-./scripts/run-exe-smoke.ps1             # 配布物の起動・リソース読込だけ
+./scripts/run-exe-smoke.ps1             # 起動・実build-info・同梱DLL/hash検査
 ```
 
 `build/windows/` が配布フォルダ、`build/DeliveryFactory-windows.zip` が配布 ZIP、`output/build-sha256.txt` に EXE の SHA256 を出力します。テンプレートが既定場所にない場合、`build-windows.ps1 -TemplateDirectory <既存テンプレートフォルダ>` を使用します。CI では同じ公式 Godot のハッシュ検証済み配布を専用 runner に取得します。
 
-`verify.ps1` は import、32項目の内部モデル検証、source起動 smoke を行います。これはGua UI/E2Eの証拠とは別です。`run-source-tests.ps1` は正式 NuGet **Gua.Testing.Godot 1.1.2 / Gua.Testing 1.1.2** と NUnit を使用します。`GodotSceneTestHost` で `res://main.tscn` を起動し、正式 Locator/guarded UI・入力、Observe、World、仮想時計で開始・保存復元・境界・個別バグ・結果からの再プレイを確認します。TRXと公式APIのJSON添付は `output/source-regression-results/` と `output/source-regression/` へ保存します。source sceneの検証であり、配布EXEの受入とは呼びません。
+`verify.ps1` は import、32項目の内部モデル検証、source起動 smoke を行います。これはGua UI/E2Eの証拠とは別です。`run-source-tests.ps1` は正式 NuGet **Gua.Testing.Godot 1.2.0 / Gua.Testing 1.2.0** と NUnit を使用します。`GodotSceneTestHost` で `res://main.tscn` を起動し、正式 Locator/guarded UI・入力、Observe、World、仮想時計で開始・保存復元・境界・個別バグ・結果からの再プレイを確認します。TRXと公式APIのJSON添付は `output/source-regression-results/` と `output/source-regression/` へ保存します。source sceneの検証であり、配布EXEの受入とは呼びません。
 
-`run-exe-smoke.ps1` はEXEがリソース/DLLを読み込んで起動マーカーに達し、エラーログなく終了することだけを確認します。操作、探索、目標判定、外部接続の保証、Playtestの合格判定は行いません。
+`build-windows.ps1` は `run-exe-smoke.ps1` で実EXEの起動、compiled build-info、同梱DLLの公式addonとのhash一致を検査し、`sample-build-manifest.json` をZIPへ同梱します。このmanifestは全同梱ファイルのhashと実測Gua identityを記録するサンプル側の記録であり、上流Gua manifestやPlaytest attestationではありません。公開addon ZIPには上流のbuild manifestが含まれないため、固定archive SHA256と実runtimeの `get_build_info()` を併用します。`run-exe-smoke.ps1` 単独はエラーログなく終了することも確認します。操作、探索、目標判定、外部接続の保証、Playtestの合格判定は行いません。
 
-CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.1.2を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ（0xC0000005）への対処として、importだけ拡張ロードとcacheを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。これは根本原因の解消を意味しません。PowerShellからのimport/exportは同じ公式配布のconsole EXEで終了を待ち、nonzero exitを失敗とします。生成EXEのsmokeは起動限定です。
+CIは [gua-tester](https://github.com/gua-project/gua-tester) の `setup-godot` と `link-gua-gdscript-addon`（v3.2 commit固定）を使い、Godot4.7/Gua1.2.0を固定します。単体回帰、正式C# source回帰、export、限定配布smokeを別stepにします。Windows hosted editor終了時のnative拡張クラッシュ（0xC0000005）への対処として、importだけ拡張ロードとcacheを分離し、exportには公式recovery modeを使用します。source回帰では正式Guaを有効に戻します。これは根本原因の解消を意味しません。PowerShellからのimport/exportは同じ公式配布のconsole EXEで終了を待ち、nonzero exitを失敗とします。生成EXEの最小SDK smokeは開始UIとmove一回による変位だけを確認します。
+
+
+テスト用サンプルは公開 **Development / remote ON / Debug上限** SDKを明示的に使用します。Gua sourceの通常出荷既定 Shipping/OFFとは異なり、一般配布の安全な既定構成を表すものではありません。起動時に `get_build_info()` のflavor/remoteEnabled/remotePermissionCeiling/sourceCommitを検査します。Gua sourceは `2e12fb3cfdf822418f349515027d6f620c5ee63b` 固定。Release最適化やDLL同梱だけで遠隔可能とは判定しません。port/envでShippingを再有効化しません。Player限定版ではないため、Player権限だけの実行適合は別途未検証です。
+
+最小EXE接続smoke（build後、repo root、.NET10が必要）:
+
+```powershell
+$env:FACTORY_PROJECT_DIR = "$pwd"
+$env:FACTORY_SMOKE_EXE = "$pwd/build/windows/DeliveryFactory.exe"
+$env:NUGET_PACKAGES = "$pwd/.deps/nuget"
+$env:DOTNET_CLI_HOME = "$pwd/output/dotnet-home"
+$env:DOTNET_GENERATE_ASPNET_CERTIFICATE = 'false'
+dotnet test tests/dotnet/Factory.Regression.Tests.csproj --no-restore --filter TestCategory=ExeMigrationSmoke --logger 'trx;LogFileName=exe-smoke.trx' --results-directory output/exe-migration-results
+```
+
+このfixtureは専用port18245・保存先でheadless EXEを一つ起動し、正式SDKで接続→通常start→move一回の変位だけを確認し、所有session/processを破棄します。探索・Scenario・予算・Trace/Replay・Playtest cleanup検証を実装しません。実時間hold後の明示releaseでは相関完了がEnqueuedのままtimeoutする現象があり、release/lease/切断時cleanupの保証はこのsmokeの成功に含めません。固定時計source回帰のrelease成功と区別します。
 
 ## Playtest との分担
 
